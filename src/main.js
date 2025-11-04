@@ -5,11 +5,12 @@ import './css/styles.css';
 import "./js/About-Us-Section"
 import "./js/FAQ-Section"
 import "./js/Feedback-Section"
-import "./js/Footer"
+
 import "./js/Furniture-Details-Modal"
 import "./js/Furniture-List-Section"
 import "./js/Hero-Section"
 import "./js/Order-Modal"
 import "./js/header"
+import "./js/footer"
 import "./js/products-api"
 import "./js/render-function"
