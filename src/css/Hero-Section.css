@@ -7,7 +7,7 @@
 
 .hero-section {
     position: relative;
-    background-image: url(../img/mobile/Hero\ Section-mb-min.png);
+    background-image: url(../img/mobile/Hero-Section-mb-min.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -94,7 +94,7 @@
 
     @media (min-resolution: 2x) {
         .hero-section {
-            background-image: url(../img/mobile/Hero\ Section-mb@2x-min.png);
+            background-image: url(../img/mobile/Hero-Section-mb@2x-min.png);
         }
     }
 
