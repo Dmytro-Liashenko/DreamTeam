@@ -4,15 +4,18 @@ const refs = {
   mobileMenu: document.querySelector('#mobile-menu-container'),
   mobaleNavList: document.querySelector('#mobile-nav'),
   navigation: document.querySelector('.navigation'),
+  overlay: document.querySelector('#menu-overlay'),
 };
 
 refs.openBtn.addEventListener('click', openMobileMenu);
 refs.closeBtn.addEventListener('click', closeMobileMenu);
 document.addEventListener('keydown', handleEscKeyClose);
+document.addEventListener('click', handleOutsideClick);
 
 function openMobileMenu() {
   refs.mobileMenu.classList.add('is-open');
   refs.navigation.classList.add('menu-active');
+  refs.overlay.classList.add('is-visible');
 
   document.body.style.overflow = 'hidden';
   refs.openBtn.setAttribute('aria-expanded', 'true');
@@ -21,6 +24,7 @@ function openMobileMenu() {
 function closeMobileMenu() {
   refs.mobileMenu.classList.remove('is-open');
   refs.navigation.classList.remove('menu-active');
+  refs.overlay.classList.remove('is-visible');
 
   document.body.style.overflow = '';
   refs.openBtn.setAttribute('aria-expanded', 'false');
@@ -29,10 +33,24 @@ function closeMobileMenu() {
 refs.mobaleNavList.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', closeMobileMenu);
 });
+
+function handleCloseIfOpen() {
+  if (refs.mobileMenu.classList.contains('is-open')) {
+    closeMobileMenu();
+  }
+}
+
 function handleEscKeyClose(event) {
   if (event.key === 'Escape') {
-    if (refs.mobileMenu.classList.contains('is-open')) {
-      closeMobileMenu();
-    }
+    handleCloseIfOpen();
+  }
+}
+
+function handleOutsideClick(evt) {
+  const isClickInsideMenu = refs.mobileMenu.contains(evt.target);
+  const isClickOnOpenBtn = refs.openBtn.contains(evt.target);
+
+  if (!isClickInsideMenu && !isClickOnOpenBtn) {
+    handleCloseIfOpen();
   }
 }
