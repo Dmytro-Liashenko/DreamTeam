@@ -1,0 +1,51 @@
+import axios from 'axios';
+
+const API_BASE_URL = 'https://furniture-store-v2.b.goit.study/api';
+const API_ENDPOINTS = {
+  FURNITURES_LIST: '/furnitures',
+  FURNITURE_ITEM: '/furnitures/',
+  CATEGORIES_LIST: '/categories',
+  USERS_ORDER: '/orders',
+};
+
+axios.defaults.baseURL = API_BASE_URL;
+
+export async function getFurnituresList() {
+  try {
+    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST);
+    return response.data.furnitures;
+  } catch (error) {
+    console.error('Failed to fetch furniture list.', error);
+    throw new Error('Failed to load furniture list.');
+  }
+}
+
+export async function getFurnituresID(id) {
+  try {
+    const response = await axios.get(`${API_ENDPOINTS.FURNITURE_ITEM}${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch furniture item.', error);
+    throw new Error('Item not found.');
+  }
+}
+
+export async function getCategory() {
+  try {
+    const response = await axios.get(API_ENDPOINTS.CATEGORIES_LIST);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch categories.', error);
+    throw new Error('Failed to load categories.');
+  }
+}
+
+export async function postUsersOrder(orderData) {
+  try {
+    const response = await axios.post(API_ENDPOINTS.USERS_ORDER, orderData);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to post order.', error);
+    throw new Error('Order submission failed.');
+  }
+}
