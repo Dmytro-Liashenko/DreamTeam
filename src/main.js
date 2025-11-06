@@ -8,7 +8,7 @@ import './js/Feedback-Section';
 import './js/Furniture-Details-Modal';
 import './js/Furniture-List-Section';
 import './js/Hero-Section';
-import './js/order-modal';
+import './js/Order-Modal';
 import './js/header';
 import './js/Footer';
 import './js/products-api';
