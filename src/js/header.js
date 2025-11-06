@@ -5,12 +5,14 @@ const refs = {
   mobaleNavList: document.querySelector('#mobile-nav'),
   navigation: document.querySelector('.navigation'),
   overlay: document.querySelector('#menu-overlay'),
+  btn: document.querySelector('.btn-header'),
 };
 
 refs.openBtn.addEventListener('click', openMobileMenu);
 refs.closeBtn.addEventListener('click', closeMobileMenu);
 document.addEventListener('keydown', handleEscKeyClose);
 document.addEventListener('click', handleOutsideClick);
+refs.btn.addEventListener('click', scrollToFurniture);
 
 function openMobileMenu() {
   refs.mobileMenu.classList.add('is-open');
@@ -53,4 +55,13 @@ function handleOutsideClick(evt) {
   if (!isClickInsideMenu && !isClickOnOpenBtn) {
     handleCloseIfOpen();
   }
+}
+
+function scrollToFurniture() {
+  const targetSection = document.querySelector('#furniture');
+
+  targetSection.scrollIntoView({
+    behavior: 'smooth',
+  });
+  closeMobileMenu();
 }
