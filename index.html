@@ -4,21 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/DreamTeam/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Меблерія</title>
     <script type="module" crossorigin src="/DreamTeam/index.js"></script>
     <link rel="modulepreload" crossorigin href="/DreamTeam/assets/vendor-GoL-r9bJ.js">
     <link rel="stylesheet" crossorigin href="/DreamTeam/assets/vendor-ClUZctLU.css">
-    <link rel="stylesheet" crossorigin href="/DreamTeam/assets/index-FeXIm613.css">
+    <link rel="stylesheet" crossorigin href="/DreamTeam/assets/index-BGciLDnj.css">
   </head>
   <body>
-
-    
-<header class="page-header">
+    <header class="page-header">
     <div class="container">
         <nav class="navigation" role="navigation">
             <a class="logo-header" href="./index.html">
@@ -81,7 +81,7 @@
                             <a href="#feedback">Відгуки</a>
                         </li>
                     </ul>
-                    <button class="btn-header" id="desktop-btn">До покупок</button>
+                    <button class="btn-header" id="mobile-btn">До покупок</button>
                 </div>
 
             </div>
@@ -89,7 +89,6 @@
     </div>
 </header>
 <div class="menu-overlay" id="menu-overlay"></div>
-
 
     <main>
       <section class="hero-section" id="hero">
@@ -122,6 +121,56 @@
 
     
     
-    
+    <button type="button" data-modal-open>open</button>
+<!--  -->
+<div class="modal-overlay" data-modal>
+  <div class="modal">
+    <button type="button" class="close-button" data-modal-close>
+      <svg width="32" height="32" class="icon-close">
+        <use href="/DreamTeam/assets/icons-kstIThY8.svg#icon-x-close"></use>
+      </svg>
+    </button>
+    <h2 class="modal-title">Замовити</h2>
+    <form class="modal-form" novalidate>
+      <div class="modal-form-item">
+        <label for="modal-form-name" class="modal-form-label">Ім'я*</label>
+        <input
+          type="text"
+          id="modal-form-name"
+          name="modal-form-name"
+          class="modal-form-input"
+          placeholder="Дмитро"
+          required
+        />
+      </div>
+      <div class="modal-form-item">
+        <label for="modal-form-phone" class="modal-form-label">Телефон*</label>
+        <input
+          type="tel"
+          id="modal-form-phone"
+          name="modal-form-phone"
+          class="modal-form-input"
+          placeholder="38 099 123 22 11"
+          required
+        />
+      </div>
+      <div class="modal-form-item">
+        <label for="modal-form-comment" class="modal-form-label"
+          >Коментар</label
+        >
+        <textarea
+          id="modal-form-comment"
+          name="modal-form-comment"
+          class="modal-form-input comment"
+          placeholder="Введіть ваш коментар..."
+          rows="4"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="modal-form-submit">Надіслати заявку</button>
+    </form>
+  </div>
+</div>
+
   </body>
 </html>
