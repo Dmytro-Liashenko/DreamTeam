@@ -60,7 +60,7 @@ min-width: 335px;
 
 .ac-trigger:hover,
 .ac-trigger:focus {
-    color: var(--color-neutral-dark);
+    color:#101828;
 }
 
 .ac-trigger {
