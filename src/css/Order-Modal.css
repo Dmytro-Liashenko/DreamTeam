@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -38,6 +47,11 @@
   height: 100%;
   border-radius: 8px;
   padding: 64px 20px;
+}
+
+.modal-open {
+  overflow: hidden;
+  height: 100vh;
 }
 
 .close-button {
@@ -87,16 +101,22 @@
 }
 
 .modal-form-input {
-  background-color: rgba(8, 12, 9, 0.15);
-  border: 1px solid rgba(8, 12, 9, 0.05);
+  background-color: rgba(8, 12, 9, 0.05);
+  border: 1px solid rgba(8, 12, 9, 0.15);
   border-radius: 12px;
   padding: 8px 12px;
   width: 295px;
   height: 42px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .modal-form-input:focus {
   outline: none;
+}
+
+.modal-form-input:hover,
+.modal-form-input:focus {
+  border: 1px solid rgba(8, 12, 9, 0.4);
 }
 
 .modal-form-input::placeholder {
@@ -109,13 +129,6 @@
 .modal-form-input.comment {
   min-height: 180px;
 }
-
-/* .invalid-input {
-  border: 1px solid #b10000;
-  color: #b10000;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
-} */
 
 .modal-form-submit {
   border-radius: 100px;
@@ -131,6 +144,12 @@
   font-weight: 500;
   line-height: 1.6;
   color: #fff;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.modal-form-submit:hover,
+.modal-form-submit:focus {
+  opacity: 50%;
 }
 
 @media (min-width: 768px) {
