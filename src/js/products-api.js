@@ -6,13 +6,18 @@ const API_ENDPOINTS = {
   FURNITURE_ITEM: '/furnitures/',
   CATEGORIES_LIST: '/categories',
   USERS_ORDER: '/orders',
+  FEEDBACKS: '/feedbacks',
 };
 
 axios.defaults.baseURL = API_BASE_URL;
 
-export async function getFurnituresList() {
+export async function getFurnituresList(categoryID) {
+  const params = {
+    category: categoryID,
+  };
+
   try {
-    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST);
+    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params });
     return response.data.furnitures;
   } catch (error) {
     console.error('Failed to fetch furniture list.', error);
@@ -27,6 +32,21 @@ export async function getFurnituresID(id) {
   } catch (error) {
     console.error('Failed to fetch furniture item.', error);
     throw new Error('Item not found.');
+  }
+}
+
+export async function getPopularItems() {
+  try {
+    const params = {
+      type: "popular",
+      limit: 3,
+    }
+
+    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params })
+    return response.data.furnitures
+  } catch (error) {
+    console.error('Failed to fetch popular furniture items:', error);
+    throw new Error('Failed to load popular items.');
   }
 }
 
@@ -47,5 +67,21 @@ export async function postUsersOrder(orderData) {
   } catch (error) {
     console.error('Failed to post order.', error);
     throw new Error('Order submission failed.');
+  }
+}
+
+export async function getFeedback(page) {
+  try {
+    const params = {
+      limit: 3,
+      page,
+    };
+
+    const response = await axios.get(API_ENDPOINTS.FEEDBACKS, { params });
+    return response.data.feedbacks;
+  } catch (error) {
+    console.error('Failed to fetch feedbacks.', error);
+    throw new Error('Fetch feedbacks data error')
+    
   }
 }
