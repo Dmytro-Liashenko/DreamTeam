@@ -53,7 +53,7 @@
     justify-content: center;
     min-width: 169px;
     height: 46px;
-    padding: 10px 24px;
+    padding: 10px 12px;
     background-color: #6b0609;
     color: #ffffff;
     font-family: var(--font-family, 'Roboto', sans-serif);
@@ -113,7 +113,7 @@
     }
 
     .main-button {
-        width: 221px;
+        width: 209px;
         justify-content: center;
         margin-bottom: 80px;
     }
@@ -153,7 +153,8 @@
     }
 
     .main-button {
-        width: 221px;
+        width: 209px;
+        height: 46px;
         margin-bottom: 0;
     } }
 
