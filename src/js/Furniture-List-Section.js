@@ -71,6 +71,6 @@ function onLoadMore() {
     loadMoreBtn.style.display = 'none';
     return;
   }
-  // const
+
   renderFurniture(nextItems);
 }
