@@ -1,34 +1,102 @@
-.swiper-wrapper {
-    position: relative;
-    height: 100%;
+.feedback-container{
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 64px 0;
 }
 
-.swiper-wrapper {
-    background: #000;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #fff;
-    margin: 0;
-    padding: 0;
+.feedback-text-wrapper {
+    margin-bottom: 80px;
 }
 
-   .swiper {
-    width: 100%;
-    height: 100%;
+.feedback-header{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: #080c09;
+
+    margin-bottom: 24px;
+}
+
+.feedback-text{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #080c09;
+}
+
+.comment-descr{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #080c09;
+    
+    margin-bottom: 24px;
+}
+
+.comment-name{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #080c09;
+}
+
+.comment-card {
+    max-width: 335px;
+    max-height: 266px;
+
+    margin-bottom: 48px;
 }
 
 .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #444;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.btn-wrapper{
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    align-self: self-end;
+    width: 112px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+
+    border: 1px solid rgba(8, 12, 9, 0.15);
+    border-radius: 100px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+}
+
+.swiper-pagination{
+    display: flex;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    opacity: 1;
+    border-radius: 100%;
+    background-color: #C9C9C9;
+
+    margin: 0 4px;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #080c09;
+}
+
+.swiper-interaction-wrapp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

@@ -1,5 +1,5 @@
 import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import 'swiper/css';
 import Raty from 'raty-js';
 
 import { getFeedback } from './products-api.js';
@@ -9,8 +9,27 @@ const carousel = document.querySelector('.swiper-wrapper')
 const swiper = new Swiper('.swiper', {
     direction: 'horizontal',
     loop: false,
-    slidesPerView: 3,
+    slidesPerView: 1,
+    spaceBetween: 48,
+    breakpoints: {
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 24,
+        },
+        1440: {
+            slidesPerView: 3,
+            spaceBetween: 32,
+        }
+    },
     effect: 'slide',
+    grabCursor: true,
+    freeMode: true,
+    breakpoints: true,
+    autoHeight: false,
+    spaceBetween: 24,
+    autoplay: {
+        delay: 5000,
+    },
 
     pagination: {
         el: '.swiper-pagination',
@@ -20,10 +39,6 @@ const swiper = new Swiper('.swiper', {
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-    },
-
-    scrollbar: {
-        el: '.swiper-scrollbar',
     },
 });
 
@@ -60,7 +75,6 @@ let currentPage = 1;
 async function loadFeedback() {
     try {
         const feedback = await getFeedback(currentPage);
-        console.log('feedback:', feedback);
         createCarousel(feedback);
     } catch (err) {
         console.log(err);
