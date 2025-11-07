@@ -10,9 +10,13 @@ const API_ENDPOINTS = {
 
 axios.defaults.baseURL = API_BASE_URL;
 
-export async function getFurnituresList() {
+export async function getFurnituresList(categoryID) {
+  const params = {
+    category: categoryID,
+  }
+
   try {
-    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST);
+    const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params });
     return response.data.furnitures;
   } catch (error) {
     console.error('Failed to fetch furniture list.', error);
