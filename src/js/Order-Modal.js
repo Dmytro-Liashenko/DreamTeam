@@ -1,3 +1,8 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
+import { postUsersOrder } from './products-api';
+
 const refs = {
   openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
@@ -36,14 +41,16 @@ function onFormSubmit(event) {
   event.preventDefault();
 
   const form = event.currentTarget;
-  const { name: nameInput, phone: phoneInput } = form.elements;
+  const { name: nameInput, phone: phoneInput, comment } = form.elements;
+  const commentValue = comment.value;
 
   clearError(nameInput);
   clearError(phoneInput);
 
   let isValid = true;
+  const nameValue = nameInput.value.trim();
 
-  if (nameInput.value.trim() === '' || nameInput.value.trim().length < 2) {
+  if (nameValue.length < 2) {
     showError(nameInput, "Будь ласка, введіть правильно ім'я");
     isValid = false;
   }
@@ -51,16 +58,38 @@ function onFormSubmit(event) {
   const phoneValue = phoneInput.value.trim().replace(/\s+/g, '');
   const phoneRegex = /^(\+?38)?0\d{9}$/;
 
-  if (phoneValue === '' || !phoneRegex.test(phoneValue)) {
+  if (!phoneRegex.test(phoneValue)) {
     showError(phoneInput, 'Невірний формат телефону');
     isValid = false;
   }
 
-  if (isValid) {
-    console.log('✅ Форма успішно заповнена');
-    form.reset();
-    closeModal();
-  }
+  if (!isValid) return;
+
+  postUsersOrder({
+    name: nameValue,
+    phone: phoneValue,
+    modelId: '',
+    color: '',
+    comment: commentValue,
+  })
+    .then(res => {
+      console.log(res);
+      iziToast.success({
+        title: 'Вітаю!',
+        message: 'Ваше замовлення оформлено успішно!',
+        position: 'topRight',
+      });
+      form.reset();
+      closeModal();
+    })
+    .catch(error => {
+      console.error('Failed to post order.', error.message);
+      iziToast.error({
+        title: 'Помилка',
+        message: `${error.message}`,
+        position: 'topRight',
+      });
+    });
 }
 
 function showError(input, message) {
