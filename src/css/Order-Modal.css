@@ -130,6 +130,17 @@ textarea:focus::placeholder {
   min-height: 180px;
 }
 
+.invalid {
+  border-color: #6b0609;
+  outline: none;
+}
+
+.error-text {
+  color: #6b0609;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 .modal-form-submit {
   border-radius: 100px;
   padding: 10px 24px;

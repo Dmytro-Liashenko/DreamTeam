@@ -1,14 +1,21 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
+import { postUsersOrder } from './products-api';
+
 const refs = {
   openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
   modal: document.querySelector('[data-modal]'),
   body: document.querySelector('body'),
+  form: document.querySelector('.modal-form'),
 };
 
 refs.openModalBtn.addEventListener('click', toggleModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
 refs.modal.addEventListener('click', onModalClick);
 window.addEventListener('keydown', onEscClick);
+refs.form.addEventListener('submit', onFormSubmit);
 
 function toggleModal() {
   refs.modal.classList.toggle('is-open');
@@ -29,4 +36,82 @@ function onEscClick(event) {
     closeModal();
   }
 }
-  
+
+function onFormSubmit(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const { name: nameInput, phone: phoneInput, comment } = form.elements;
+  const commentValue = comment.value;
+
+  clearError(nameInput);
+  clearError(phoneInput);
+
+  let isValid = true;
+  const nameValue = nameInput.value.trim();
+
+  if (nameValue.length < 2) {
+    showError(nameInput, "Будь ласка, введіть правильно ім'я");
+    isValid = false;
+  }
+
+  const phoneValue = phoneInput.value.trim().replace(/\s+/g, '');
+  const phoneRegex = /^(\+?38)?0\d{9}$/;
+
+  if (!phoneRegex.test(phoneValue)) {
+    showError(phoneInput, 'Невірний формат телефону');
+    isValid = false;
+  }
+
+  if (!isValid) return;
+
+  postUsersOrder({
+    name: nameValue,
+    phone: phoneValue,
+    modelId: '',
+    color: '',
+    comment: commentValue,
+  })
+    .then(res => {
+      console.log(res);
+      iziToast.success({
+        title: 'Вітаю!',
+        message: 'Ваше замовлення оформлено успішно!',
+        position: 'topRight',
+      });
+      form.reset();
+      closeModal();
+    })
+    .catch(error => {
+      console.error('Failed to post order.', error.message);
+      iziToast.error({
+        title: 'Помилка',
+        message: `${error.message}`,
+        position: 'topRight',
+      });
+    });
+}
+
+function showError(input, message) {
+  input.classList.add('invalid');
+
+  if (
+    !input.nextElementSibling ||
+    !input.nextElementSibling.classList.contains('error-text')
+  ) {
+    const error = document.createElement('p');
+    error.className = 'error-text';
+    error.textContent = message;
+    input.insertAdjacentElement('afterend', error);
+  }
+}
+
+function clearError(input) {
+  input.classList.remove('invalid');
+  if (
+    input.nextElementSibling &&
+    input.nextElementSibling.classList.contains('error-text')
+  ) {
+    input.nextElementSibling.remove();
+  }
+}
