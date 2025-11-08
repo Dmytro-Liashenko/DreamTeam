@@ -86,4 +86,3 @@ export async function getFeedback(page) {
   }
 }
 
-console.log(await getCategory());
