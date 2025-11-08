@@ -39,7 +39,7 @@ export async function getPopularItems() {
   try {
     const params = {
       type: "popular",
-      limit: 3,
+      limit: 4,
     }
 
     const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params })
@@ -85,3 +85,5 @@ export async function getFeedback(page) {
 
   }
 }
+
+console.log(await getCategory());
