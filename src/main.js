@@ -13,3 +13,4 @@ import './js/header';
 import './js/Footer';
 import './js/products-api';
 import './js/render-function';
+import './js/Popular-Products-Section'
