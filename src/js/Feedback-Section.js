@@ -24,7 +24,6 @@ const swiper = new Swiper('.swiper', {
     effect: 'slide',
     grabCursor: true,
     freeMode: true,
-    breakpoints: true,
     autoHeight: false,
     spaceBetween: 24,
     autoplay: {
@@ -41,6 +40,8 @@ const swiper = new Swiper('.swiper', {
         prevEl: '.swiper-button-prev',
     },
 });
+
+// Відмальовка зірочок не працює
 
 function initRatings() {
     document.querySelectorAll('.rating').forEach(elem => {

@@ -42,6 +42,7 @@
 }
 
 .comment-card {
+    padding: 0px 48px 0px 0px;
     max-width: 335px;
     max-height: 266px;
 
@@ -118,6 +119,7 @@
     background: #f2f2f2;
     opacity: 0.3;
     fill: #080c09;
+    cursor: no-drop;
 }
 
 .swiper-pagination{
@@ -149,4 +151,38 @@
     width: 32px;
     height: 32px;
     display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .feedback-container {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 32px;
+    }
+
+    .swiper-slide {
+        gap: 24px;
+    }
+
+    .comment-card {
+        max-width: 341px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .feedback-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 64px;
+    }
+
+    .feedback-header {
+        font-size: 48px;
+    }
+
+    .comment-card {
+        max-width: 421px;
+    
+        margin-bottom: 48px;
+    }
 }
