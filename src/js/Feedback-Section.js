@@ -42,6 +42,25 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
+function initRatings() {
+    document.querySelectorAll('.rating').forEach(elem => {
+        new Raty(elem, {
+            score: elem.dataset.score,
+            starSize: 20,
+            step: 0.5,
+            score: elem.dataset.score,
+            readOnly: true,
+            numberMax: 5,
+            precision: false,
+            round: { down: 0.3, full: 0.7, up: 0.8 },
+            path: './img/star-icons',
+            starOn: 'star-full.png',
+            starHalf: 'star-half.png',
+            starOff,
+        });
+    });
+}
+
 function createCardMarkup(array) {
     return array.map(({ name, descr, rate }) => `
     <div class="swiper-slide">
@@ -52,16 +71,6 @@ function createCardMarkup(array) {
       </div>
     </div>
     `).join('\n')
-}
-
-function initRatings() {
-    document.querySelectorAll('.rating').forEach(elem => {
-        new Raty(elem, {
-            starSize: 18,
-            score: elem.dataset.score,
-            readOnly: true,
-        });
-    });
 }
 
 function createCarousel(feedback) {
