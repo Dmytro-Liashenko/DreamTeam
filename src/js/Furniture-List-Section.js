@@ -1,24 +1,33 @@
 import { getFurnituresList } from './products-api';
 
-const BASE_URL = 'https://furniture-store-v2.b.goit.study/api';
-const loadMoreBtn = document.querySelector('.load-more-btn');
-const categoriesContainer = document.querySelector('.categories-list');
 const furnitureList = document.querySelector('.furniture-list');
+const loadMoreBtn = document.querySelector('.load-more-btn');
 
 let currentPage = 1;
-let selectedCategory = '';
-let allFurnitures = [];
+const limit = 8;
+let totalLoaded = 0;
+let totalAvailable = 0;
 
-document.addEventListener('DOMContentLoaded', initFurnitureSection);
-
-async function initFurnitureSection() {
+async function loadFurniture(page = 1) {
   try {
-    const furnitures = await getFurnituresList();
-    allFurnitures = furnitures;
+    const response = await fetch(
+      `https://furniture-store-v2.b.goit.study/api/furnitures?page=${page}&limit=${limit}`
+    );
+    const data = await response.json();
 
-    renderFurniture(furnitures.slice(0, 6));
+    const furnitures = data.furnitures;
+    totalAvailable = data.total;
+
+    renderFurniture(furnitures);
+
+    totalLoaded += furnitures.length;
+    console.log(`Завантажено: ${totalLoaded}/${totalAvailable}`);
+
+    if (totalLoaded >= totalAvailable) {
+      loadMoreBtn.style.display = 'none';
+    }
   } catch (error) {
-    console.error('❌ Помилка запиту до API:', error);
+    console.error('❌ Помилка при завантаженні меблів:', error);
   }
 }
 
@@ -42,35 +51,23 @@ function renderFurniture(items) {
 
       return `
           <li class="furniture-card" data-id="${_id}">
-            <img src="${imageSrc}" alt="${name}" width="300" height="200" loading="lazy" />
+            <img class="img-card" src="${imageSrc}" alt="${name}" width="300" height="200" loading="lazy" />
             <h3>${name}</h3>
             <div class="color-list">
               <span>Кольори:</span> ${colorDots}
             </div>
             <p>Ціна: ${price} ₴</p>
-          </li>`;
+            <button class="btn-card">Детальніше</button>
+             </li>`;
     })
     .join('');
 
   furnitureList.insertAdjacentHTML('beforeend', markup);
 }
 
-function clearFurniture() {
-  furnitureList.innerHTML = '';
-}
-
-loadMoreBtn.addEventListener('click', onLoadMore);
-
-function onLoadMore() {
+loadMoreBtn.addEventListener('click', () => {
   currentPage++;
-  const start = (currentPage - 1) * 8;
-  const end = currentPage * 8;
-  const nextItems = allFurnitures.slice(start, end);
+  loadFurniture(currentPage);
+});
 
-  if (nextItems.length === 0) {
-    loadMoreBtn.style.display = 'none';
-    return;
-  }
-
-  renderFurniture(nextItems);
-}
+loadFurniture();
