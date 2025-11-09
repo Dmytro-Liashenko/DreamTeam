@@ -1,5 +1,7 @@
 /* Mobile version base*/
-@media (min-width: 375px) {
+.furniture-section{
+  padding: 48px 0;
+}
   .container-categories {
     width: 100%;
     max-width: 375px;
@@ -24,35 +26,51 @@
     padding-bottom: 40px;
     margin-bottom: 0;
   }
-
+.categories-item{
+  position: relative;
+  flex: 1 1 calc(50% - 16px); 
+  max-width: 158px;           
+  min-width: 120px;          
+  display: flex;
+  justify-content: center;
+}
   .img-categories {
+    filter: brightness(80%);
     width: 100%;
     height: auto;
-    display: block;
-    border: 8px solid transparent;
+    
+    border: none;
     border-radius: 16px;
     background: rgb(255, 255, 255);
     cursor: pointer;
-    transition: border 0.3s ease;
+    transition: outline 0.2s ease;
+    
   }
-  .img-categories:hover {
-    border-color: #ffffff;
-  }
-  .img-categories.active {
-    border-color: #6b0609;
-  }
+.img-categories-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #FFFFFF;
+  min-width: 126px;
 
+}
+.img-categories:first-child {
+  outline: 8px solid #6b0609;
+}
   .categories-list-item {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
-  /* -------------------------------------------- */
   .category-card {
     position: relative;
     overflow: hidden;
@@ -88,6 +106,9 @@
     max-width: 90%;
     word-wrap: break-word;
   }
+  
+
+
   /* -------------------------------------------- */
   .our-furniture {
     margin: 80px 64px 40px 64px;
@@ -137,6 +158,48 @@
     gap: 24px;
     margin-top: 40px;
   }
+  .furniture-item{
+  
+
+  }
+  .furniture-item-img{
+    border-radius: 8px;
+    width: 335px;
+    height: 277px;
+    margin-bottom: 16px;
+  }
+  .furniture-item-name{
+    
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 160%;
+    margin-bottom: 8px;
+  }
+  .furniture-item-color{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .furniture-item-price{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 160%;
+    margin-bottom: 16px;
+  }
+  .furniture-item-more{
+    display: block;
+    border-radius: 100px;
+    padding: 10px 24px;
+    max-width: 335px;
+    height: 46px;
+    background-color: #F3F3F3;
+    box-shadow: 0 1px 2px 0 #F3F3F3, inset 0 -2px 1px 0 #cdcccc, inset 0 0 0 1px #F3F3F3;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 160%;
+    text-align: center;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
   .btn-card {
     border-radius: 100px;
     padding: 10px 24px;
@@ -183,37 +246,38 @@
     display: flex;
     justify-content: center;
   }
-}
 /*Tablet version (з 768px) */
-@media (min-width: 768px) {
-  .container-categories {
-    width: 100%;
-    min-width: 768px;
-    margin: 0 auto;
-    padding: 48px 20px;
-  }
+  @media screen and (min-width: 768px) {
 
-  .categories-list-item {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    max-width: 720px;
-    margin: 0 auto;
+    .categories-list-item {
+      
+      gap: 24px;
+      
+      
+    }
   }
-}
 
 /* Desktop version (з 1440px) */
-@media (min-width: 1440px) {
-  .categories-list-item {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 20px;
-    min-width: 1440px;
-    margin: 0 auto;
+@media screen and (min-width: 1440px) {
+  .furniture-section{
+    padding: 80px 0;
+  }
+  .furniture-list{
+  row-gap: 40px;
   }
 
-  .container-categories {
-    width: 100%;
-    min-width: 1440px;
-    margin: 0 auto;
-    padding: 48px 20px;
-  }
+    .img-categories:hover {
+    outline:8px solid #ffffff;
 }
+.furniture-item-more:focus{
+  background-color: #975052;
+}
+.furniture-item-more:hover{
+  background-color: #975052;
+}
+}
+
+.img-categories.active {
+    outline: 8px solid #6b0609;
+    
+  }
