@@ -9,6 +9,6 @@ import './js/Furniture-List-Section';
 import './js/Hero-Section';
 import './js/Order-Modal';
 import './js/header';
-import './js/footer';
+import './js/Footer';
 import './js/render-function';
 import './js/Popular-Products-Section';
