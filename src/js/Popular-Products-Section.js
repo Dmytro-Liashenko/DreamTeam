@@ -1,9 +1,13 @@
+import Swiper from 'swiper/bundle';
+import 'swiper/css';
+import { getPopularItems } from "./products-api";
+
 export async function loadPopularFurniture() {
   const wrapper = document.getElementById('popular-products-wrapper');
 
   try {
-    const response = await fetch('/furniture?type=popular');
-    const data = await response.json();
+    const response = getPopularItems();
+    const data = await response;
 
     if (!data || data.length < 3) {
       wrapper.innerHTML = '<p>Популярні товари тимчасово відсутні.</p>';
@@ -46,6 +50,8 @@ export async function loadPopularFurniture() {
         1024: { slidesPerView: 3, spaceBetween: 20 }
       }
     });
+
+    swiper.update(); 
 
     const prevBtn = document.querySelector('.popular-button-prev');
     const nextBtn = document.querySelector('.popular-button-next');
