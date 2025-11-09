@@ -14,7 +14,7 @@ export function renderFurniture(items, clearList = false) {
           <h3 class="furniture-item-name">${name}</h3>
           <p class="furniture-item-color">${colorDots}</p>
           <p class="furniture-item-price">${price} грн</p>
-          <a href="/product/${_id}" class="furniture-item-more">Детальніше</a>
+          <button type="button" class="item-btn" data-id="${_id}">Детальніше</button>
         </li>
       `;
     })

@@ -35,11 +35,12 @@ export async function getFurnituresID(id) {
   }
 }
 
-export async function getPopularItems() {
+export async function getPopularItems(page) {
   try {
     const params = {
       type: "popular",
       limit: 4,
+      page,
     }
 
     const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params })
@@ -86,3 +87,8 @@ export async function getFeedback(page) {
   }
 }
 
+// console.log(await getFurnituresList("66504a50a1b2c3d4e5f6a7b9"));
+// console.log(await getCategory());
+console.log(await getFurnituresID("682f9bbf8acbdf505592ac42"));
+console.log(await getPopularItems(1));
+console.log(await getPopularItems(2));
