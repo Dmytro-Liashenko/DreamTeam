@@ -1,29 +1,30 @@
-export function renderCategories(categories) {
-  const container = document.querySelector('.categories-list');
-  container.innerHTML = categories
-    .map(
-      cat =>
-        `<button class="category-btn" data-category="${cat.slug}">${cat.name}</button>`
-    )
-    .join('');
-}
+import { furnitureList } from "./Furniture-List-Section";
 
-export function renderFurniture(items) {
-  const list = document.querySelector('.furniture-list');
+export function renderFurniture(items, clearList = false) {
+  const html = items
+    .map(({ _id, images, name, color, price }) => {
+      const imageSrc = images?.[0] || 'https://via.placeholder.com/300x200?text=No+Image';
+      const colorDots = Array.isArray(color)
+        ? color.map(c => `<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c};margin:0 2px;"></span>`).join('')
+        : '—';
 
-  const markup = items
-    .map(
-      ({ id, image, name, color, price }) => `
-      <li class="furniture-card">
-        <img src="${image}" alt="${name}" />
-        <h3>${name}</h3>
-        <p>Колір: ${color}</p>
-        <p>Ціна: ${price} ₴</p>
-        <button class="details-btn" data-id="${id}">Детальніше</button>
-      </li>`
-    )
+      return `
+        <li class="furniture-item" data-id="${_id}">
+          <img src="${imageSrc}" alt="${name}" style="width: 310px; height: 256px; object-fit: cover; border-radius: 8px;" />
+          <h3>${name}</h3>
+          <p>Кольори: ${colorDots}</p>
+          <p>Ціна: ${price} грн</p>
+          <a href="/product/${_id}">Детальніше</a>
+        </li>
+      `;
+    })
     .join('');
-  list.insertAdjacentHTML('beforeend', markup);
+
+  if (clearList) {
+    furnitureList.innerHTML = html;
+  } else {
+    furnitureList.insertAdjacentHTML('beforeend', html);
+  }
 }
 
 export function clearFurniture() {
