@@ -1,4 +1,4 @@
-/* Mobile version*/
+/* Mobile version base*/
 body {
   font-family: 'Raleway', sans-serif;
   min-width: 375px;
@@ -148,7 +148,7 @@ body {
   justify-content: center;
 }
 
-/*Tablet breakpoint (з 768px) ==== */
+/*Tablet version (з 768px) */
 @media (min-width: 768px) {
   .container-categories {
     width: 100%;
@@ -158,17 +158,17 @@ body {
   }
 
   .categories-list-item {
-    grid-template-columns: repeat(4, 1fr); /* 4 у ряд */
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     max-width: 720px;
     margin: 0 auto;
   }
 }
 
-/* ==== Desktop breakpoint (з 1440px) ==== */
+/* Desktop version (з 1440px) */
 @media (min-width: 1440px) {
   .categories-list-item {
-    grid-template-columns: repeat(7, 1fr); /* 7 у ряд */
+    grid-template-columns: repeat(7, 1fr);
     gap: 20px;
     min-width: 1440px;
     margin: 0 auto;
