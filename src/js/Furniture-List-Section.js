@@ -71,3 +71,12 @@ loadMoreBtn.addEventListener('click', () => {
 });
 
 loadFurniture();
+const categories = document.querySelectorAll('.img-categories');
+
+categories.forEach(cat => {
+  cat.addEventListener('click', () => {
+    // При кліку знімаємо "active" з усіх, а додаємо тільки поточному
+    categories.forEach(c => c.classList.remove('active'));
+    cat.classList.add('active');
+  });
+});
