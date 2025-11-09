@@ -18,7 +18,8 @@ function createSlideMarkup(products) {
           `<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:${c}; margin:0 2px;"></span>`).join('') : ''}
       </p>
       <p class="product-price">${product.price} грн</p>
-      <a class="more-info" href="/product/${product.id}">Детальніше</a>
+      <a class="more-info" href= >Детальніше</a>
+      
     </div>
   `).join('');
 }
