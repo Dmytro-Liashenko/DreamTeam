@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .menu-toggle-btn {
@@ -29,6 +29,7 @@
     background-color: #FFFFFF;
     z-index: 100;
 
+
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -50,7 +51,6 @@
 }
 
 .mobile-menu .logo-header {
-    margin-right: auto;
     display: block;
 }
 
@@ -60,6 +60,7 @@
     align-items: center;
     gap: 32px;
     width: 100%;
+    padding-bottom: 32px;
 }
 
 .menu-content-group .site-navigation {
@@ -68,6 +69,11 @@
     align-items: center;
     gap: 32px;
     margin-top: 32px;
+
+    color: #080c09;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.6;
 }
 
 .menu-content-group .btn-header {
@@ -92,6 +98,7 @@
     box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(8, 12, 9, 0.05);
 }
 
+
 .menu-close-btn {
     position: absolute;
     top: 20px;
@@ -102,6 +109,7 @@
 .navigation.menu-active .menu-toggle-btn {
     display: none;
 }
+
 
 @media screen and (min-width: 768px) {
 
@@ -153,21 +161,20 @@
 
     .menu-content-group .site-navigation {
         align-items: flex-end;
-        font-size: 18px;
-        font-weight: 600;
     }
 }
 
 @media screen and (min-width: 900px) {
     .mobile-menu {
         width: 298px;
-        padding: 24px 66px;
+        padding: 24px 98px 24px 25px;
+
         margin-right: 0;
         margin-left: auto;
     }
 
     .menu-close-btn {
-        right: 66px;
+        right: 98px;
 
     }
 }
@@ -188,10 +195,17 @@
     }
 
     .link-header a {
-        color: #080c09;
         font-weight: 400;
         font-size: 16px;
-        line-height: 1.6;
+        transition: opacity 250ms ease;
+        padding: 20px 0;
+    }
+
+    .link-header a:hover,
+    .link-header a:focus {
+        opacity: 0.7;
+        text-decoration: underline;
+        color: #920d11;
     }
 
     .btn-header {
@@ -223,6 +237,14 @@
         &:focus {
             opacity: 0.5;
         }
+    }
+
+    .link-header:hover {
+        color: #6B0609;
+    }
+
+    .site-navigation:focus {
+        color: #6B0609;
     }
 
     .menu-toggle-btn {
