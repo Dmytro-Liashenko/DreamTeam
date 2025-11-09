@@ -39,7 +39,7 @@ export async function getPopularItems() {
   try {
     const params = {
       type: "popular",
-      limit: 3,
+      limit: 4,
     }
 
     const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params })
@@ -73,7 +73,7 @@ export async function postUsersOrder(orderData) {
 export async function getFeedback(page) {
   try {
     const params = {
-      limit: 3,
+      limit: 10,
       page,
     };
 
@@ -82,6 +82,7 @@ export async function getFeedback(page) {
   } catch (error) {
     console.error('Failed to fetch feedbacks.', error);
     throw new Error('Fetch feedbacks data error')
-    
+
   }
 }
+
