@@ -56,3 +56,13 @@ loadMoreBtn.addEventListener('click', () => {
   currentPage++;
   loadFurniture(currentPage, selectedCategory);
 });
+
+
+const categories = document.querySelectorAll('.img-categories');
+
+categories.forEach(cat => {
+  cat.addEventListener('click', () => {
+    categories.forEach(c => c.classList.remove('active'));
+    cat.classList.add('active');
+  });
+});

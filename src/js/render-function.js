@@ -30,3 +30,5 @@ export function renderFurniture(items, clearList = false) {
 export function clearFurniture() {
   document.querySelector('.furniture-list').innerHTML = '';
 }
+
+// frame for categories
