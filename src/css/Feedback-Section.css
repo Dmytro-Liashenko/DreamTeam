@@ -1,7 +1,7 @@
 .feedback-container{
     max-width: 375px;
     margin: 0 auto;
-    padding: 64px 0;
+    padding: 64px 20px;
 }
 
 .feedback-text-wrapper {
@@ -47,7 +47,6 @@
 }
 
 .comment-card {
-    padding: 0px 48px 0px 0px;
     max-width: 335px;
     max-height: 266px;
 
