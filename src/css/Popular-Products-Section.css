@@ -58,10 +58,61 @@
   background: #eeeeee;
 }
 
-.popular-button-prev.disabled-nav,
-.popular-button-next.disabled-nav {
+.popular-button-prev,
+.popular-button-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 8px;
+
+  border: 1px solid rgba(8, 12, 9, 0.15);
+  border-radius: 100px;
+  padding: 12px;
+  width: 48px;
+  height: 48px;
+
+  text-decoration: none;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(8, 12, 9, 0.05);
+}
+
+.popular-button-prev:hover,
+.popular-button-next:hover {
+  background-color: #975052;
+  box-shadow: 0 4px 12px rgba(107, 6, 9, 0.3),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25);
+  outline: none;
+  fill: #fff;
+}
+
+.popular-button-prev:focus,
+.popular-button-next:focus {
+  background-color: #975052;
+  box-shadow: 0 4px 12px rgba(107, 6, 9, 0.3),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25);
+  outline: none;
+  fill: #fff;
+}
+
+.popular-button-prev.disabled,
+.popular-button-next.disabled {
+  background: #f2f2f2;
   opacity: 0.3;
-  pointer-events: none;
+  fill: #080c09;
+  cursor: no-drop;
+}
+
+.swiper-pagination .popular-pagination {
+  display: flex;
 }
 
 .popular-swiper-controls {
