@@ -35,11 +35,12 @@ export async function getFurnituresID(id) {
   }
 }
 
-export async function getPopularItems() {
+export async function getPopularItems(page) {
   try {
     const params = {
       type: "popular",
       limit: 4,
+      page,
     }
 
     const response = await axios.get(API_ENDPOINTS.FURNITURES_LIST, { params })
@@ -85,4 +86,3 @@ export async function getFeedback(page) {
 
   }
 }
-
