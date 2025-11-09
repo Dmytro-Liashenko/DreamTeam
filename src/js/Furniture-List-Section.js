@@ -52,6 +52,11 @@ categoriesList.addEventListener('click', e => {
 
 loadFurniture();
 
+loadMoreBtn.addEventListener('click', () => {
+  currentPage++;
+  loadFurniture(currentPage, selectedCategory);
+});
+
 const categories = document.querySelectorAll('.img-categories');
 
 categories.forEach(cat => {
