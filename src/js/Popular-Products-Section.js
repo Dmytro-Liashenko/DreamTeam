@@ -62,13 +62,15 @@ function addSlidesToSwiper(products) {
 }
 
 async function loadPopularFurniture(page = 1) {
-  try {
+  try{
     const products = await getPopularItems(page);
-    if (!products || products.length === 0) return;
+    if(!products || products.length === 0) {
+      return;
+    } 
     addSlidesToSwiper(products);
   } catch (err) {
     console.error('Помилка завантаження популярних товарів:', err);
-    wrapper.innerHTML = '<p>Не вдалося завантажити популярні товари.</p>';
+    wrapper.innerHTML = '<p>Не вдалося завантажити популярні товари.</p>'
   }
 }
 

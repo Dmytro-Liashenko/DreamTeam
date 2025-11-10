@@ -10,11 +10,15 @@ export function renderFurniture(items, clearList = false) {
 
       return `
         <li class="furniture-item" data-id="${_id}">
-          <img class="furniture-item-img" src="${imageSrc}" alt="${name}" style="width: 310px; height: 256px; object-fit: cover; border-radius: 8px;" />
-          <h3 class="furniture-item-name">${name}</h3>
-          <p class="furniture-item-color">${colorDots}</p>
-          <p class="furniture-item-price">${price} грн</p>
-          <a href="/product/${_id}" class="furniture-item-more">Детальніше</a>
+          <div сlass="furniture-img">
+            <img class="furniture-item-img" src="${imageSrc}" alt="${name}" style="width: 310px; height: 256px; object-fit: cover; border-radius: 8px;" />
+          </div>
+          <div class="furniture-information">
+            <h3 class="furniture-item-name">${name}</h3>
+            <p class="furniture-item-color">${colorDots}</p>
+            <p class="furniture-item-price">${price} грн</p>
+            <button type="button" class="item-btn" data-id="${_id}">Детальніше</button>
+          </div>
         </li>
       `;
     })

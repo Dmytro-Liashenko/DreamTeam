@@ -1,16 +1,17 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 import Raty from 'raty-js';
-
+import starHalfUrl from "../img/star-icons/star-half.svg"
+import starOffUrl from "../img/star-icons/star-off.svg"
+import starOnUrl from "../img/star-icons/star-on.svg"
 import { getFeedback } from './products-api.js';
 
-const carousel = document.querySelector('.swiper-wrapper')
+const carousel = document.querySelector('.feedback-swiper-wrapper')
 
-const swiper = new Swiper('.swiper', {
+const swiper = new Swiper('.feedback-swiper', {
     direction: 'horizontal',
     loop: false,
     slidesPerView: 1,
-    spaceBetween: 48,
     breakpoints: {
         768: {
             slidesPerView: 2,
@@ -31,20 +32,18 @@ const swiper = new Swiper('.swiper', {
     },
 
     pagination: {
-        el: '.swiper-pagination',
+        el: '.feedback-pagination',
         clickable: true,
     },
 
     navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.feedback-swiper-button-next',
+        prevEl: '.feedback-swiper-button-prev',
     },
 });
 
-// Відмальовка зірочок не працює
-
 function initRatings() {
-    document.querySelectorAll('.rating').forEach(elem => {
+    document.querySelectorAll('.feedback-rating').forEach(elem => {
         new Raty(elem, {
             score: elem.dataset.score,
             starSize: 20,
@@ -54,21 +53,20 @@ function initRatings() {
             numberMax: 5,
             precision: false,
             round: { down: 0.3, full: 0.7, up: 0.8 },
-            path: './img/star-icons',
-            starOn: 'star-full.png',
-            starHalf: 'star-half.png',
-            starOff,
-        });
+            starOn: starOnUrl,
+            starHalf: starHalfUrl,
+            starOff: starOffUrl,
+        }).init();
     });
 }
 
 function createCardMarkup(array) {
     return array.map(({ name, descr, rate }) => `
-    <div class="swiper-slide">
-      <div class="comment-card">
-        <div class="rating" data-score="${rate}"></div>
-        <p class="comment-descr">"${descr}"</p>
-        <h3 class="comment-name">${name}</h3>
+    <div class="swiper-slide feedback-swiper-slide">
+      <div class="feedback-comment-card">
+        <div class="feedback-rating" data-score="${rate}"></div>
+        <p class="feedback-comment-descr">"${descr}"</p>
+        <h3 class="feedback-comment-name">${name}</h3>
       </div>
     </div>
     `).join('\n')
