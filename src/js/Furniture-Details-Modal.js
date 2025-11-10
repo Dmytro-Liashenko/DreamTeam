@@ -1,197 +1,124 @@
-(function () {
-  const modal = document.getElementById('furnitureModal');
-  const mainImg = modal.querySelector('.furn-modal__main-img');
-  const thumbs = modal.querySelector('.furn-modal__thumbs');
-  const titleEl = modal.querySelector('.furn-modal__title');
-  const catEl = modal.querySelector('.furn-modal__category');
-  const priceEl = modal.querySelector('.furn-modal__price');
-  const rateEl = modal.querySelector('.furn-modal__rating');
-  const colorsForm = modal.querySelector('.furn-modal__colors');
-  const descEl = modal.querySelector('.furn-modal__desc');
-  const sizesEl = modal.querySelector('.furn-modal__sizes');
-  const orderBtn = modal.querySelector('.furn-modal__order');
+import { renderFurniture } from "./render-function";
+import { getFurnituresID, getFurnituresList } from './products-api';
 
-  let currentProduct = null;
-
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
-  const productsList = $('#categories-list');
-
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-  function getCategoryText(category) {
-    if (!category) return '';
-    if (typeof category === 'string') return category;
-    if (typeof category === 'object') {
-      return (
-        category.name ??
-        category.title ??
-        category.label ??
-        Object.values(category).find(v => typeof v === 'string') ??
-        ''
-      );
-    }
-    return '';
+const modalRefs = {
+  overlay: document.querySelector('[data-modal-item]'),
+  darkOverlay: document.querySelector('#menu-overlay'),
+  closeBtn: document.querySelector('[data-modal-close]'),
+  contentWrapper: document.querySelector('.modal-content-wrapper'),
+  furnitureList: document.querySelector('.furniture-list'),
+};
+/*
+function roundRating(rawRating) {
+  if (typeof rawRating !== 'number' || isNaN(rawRating)) {
+    return 0;
   }
-
-  function getRating(p) {
-    const r = p.rating;
-    if (typeof r === 'number') return r;
-    if (r && typeof r === 'object') return r.value ?? r.rate ?? r.score ?? r.stars ?? 0;
-    if (typeof p.stars === 'number') return p.stars;
-    if (typeof p.score === 'number') return p.score;
-    if (typeof p.popularity === 'number') return Math.min(5, p.popularity);
-    return 4.8;
+  if (rawRating >= 3.3 && rawRating <= 3.7) {
+    return 3.5;
+  } else if (rawRating >= 3.8 && rawRating <= 4.2) {
+    return 4.0;
   }
+  return Math.round(rawRating * 2) / 2;
+}
+*/
 
-  function getColors(p) {
-    const list = Array.isArray(p.colors || p.colours) ? (p.colors || p.colours) : [];
-    const toCss = x => typeof x === 'string' ? x : (x && (x.hex ?? x.color ?? x.value ?? x.name)) || null;
-    const out = list.map(toCss).filter(Boolean);
-    return out.length ? out : ['#111', '#c0c0c0', '#f5f5f5'];
-  }
-
-  function open() {
-    modal.hidden = false;
-    document.body.classList.add('no-scroll');
-    modal.querySelector('[data-close]').focus({ preventScroll: true });
-    window.addEventListener('keydown', onEsc);
-  }
-
-  function close() {
-    modal.hidden = true;
-    document.body.classList.remove('no-scroll');
-    window.removeEventListener('keydown', onEsc);
-  }
-
-  function onEsc(e) {
-    if (e.key === 'Escape') close();
-  }
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.closest('[data-close]')) close();
-  });
-
-  function getSelectedColor() {
-    const checked = colorsForm.querySelector('input[name="color"]:checked');
-    return checked ? checked.value : null;
-  }
-
-  orderBtn.addEventListener('click', () => {
-    const detail = {
-      productId: currentProduct?._id,
-      title: titleEl.textContent,
-      color: getSelectedColor(),
-    };
-    close();
-    document.dispatchEvent(new CustomEvent('open-order-modal', { detail }));
-    if (typeof window.openOrderModal === 'function') window.openOrderModal(detail);
-  });
-
-  function render(product) {
-    currentProduct = product;
-
-    const title = product.title || product.name || 'Модель';
-    const categoryText = getCategoryText(product.category);
-    const price = product.price;
-    const rating = clamp(Number(getRating(product)) || 0, 0, 5);
-    const images = product.images?.length ? product.images : (product.image ? [product.image] : []);
-    const description = product.description || '';
-    const colors = getColors(product);
-    const size = product.size || product.sizes || product.dimensions || {};
-
-    titleEl.textContent = title;
-    catEl.textContent = categoryText;
-    priceEl.textContent = (price != null) ? `${price} грн` : '';
-    rateEl.style.setProperty('--value', rating);
-
-    const imgs = images.length ? images : [''];
-    mainImg.src = imgs[0] || '';
-    mainImg.alt = title;
-
-    const thumbImgs = imgs.slice(1, 3); 
-    thumbs.innerHTML = thumbImgs.map((src, i) =>
-      `<li>
-          <button type="button" aria-label="Зображення ${i + 2}">
-            <img src="${src}" alt="${title}">
-          </button>
-        </li>`
-    ).join('');
-
-    thumbs.onclick = (e) => {
-      const btn = e.target.closest('button');
-      if (!btn) return;
-      const img = btn.querySelector('img');
-      if (!img) return;
-      mainImg.src = img.src;
-      thumbs.querySelectorAll('img').forEach(x => x.removeAttribute('aria-current'));
-      img.setAttribute('aria-current', 'true');
-    };
-
-    colorsForm.innerHTML = '';
-    colors.forEach((clr, idx) => {
-      const wrap = document.createElement('label');
-      wrap.className = 'furn-color';
-      wrap.style.background = clr;
-      wrap.title = typeof clr === 'string' ? clr : 'Колір';
-
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.name = 'color';
-      input.value = clr;
-      if (idx === 0) input.checked = true;
-
-      wrap.appendChild(input);
-      colorsForm.appendChild(wrap);
-    });
-    colorsForm.onchange = (e) => {
-      if (e.target.name !== 'color') return;
-      [...colorsForm.querySelectorAll('input[name="color"]')].forEach(cb => {
-        if (cb !== e.target) cb.checked = false;
-      });
-    };
-
-    descEl.textContent = description;
-
-    sizesEl.innerHTML = '';
-    const s = (typeof size === 'object' && size) ? size : {};
-    const W = s.width || s.w || s.W;
-    const H = s.height || s.h || s.H;
-    const D = s.depth || s.length || s.d || s.L;
-    if (W && H && D) {
-      sizesEl.innerHTML = `<li>Розміри: ${W} x ${H} x ${D}</li>`;
-    } else {
-      const rows = [];
-      if (W) rows.push(`Ширина: ${W}`);
-      if (H) rows.push(`Висота: ${H}`);
-      if (D) rows.push(`Глибина: ${D}`);
-      const asString = typeof size === 'string' ? [size] : [];
-      sizesEl.innerHTML = [...rows, ...asString].map(v => `<li>${v}</li>`).join('');
-    }
-  }
-
-  productsList?.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-modal-open]');
-  if (!btn) return;
-
-  e.preventDefault(); 
-
-  const card = e.target.closest('.furniture-item');
-  if (!card) return;
-
-  const id = card.dataset.id;
-  const cache = (window.__productsCache instanceof Map) ? window.__productsCache : null;
-  const product = cache?.get(id);
-
-  if (!product) {
-    // Fallback: Get data directly from the HTML
-    const title = card.querySelector('.gallery-title')?.textContent?.trim();
-    const img = card.querySelector('.furniture-image')?.src;
-    const price = card.querySelector('.furniture-price')?.textContent?.trim();
+function createProductModalMarkup(item) {
+  const { name, category, price, description, sizes, color, images } = item;
+  const galleryMarkup = images
+    .map(img => `<img src="${img}" alt="${name}" width="260">`)
+    .join('');
+  const colorMarkup = Array.isArray(color)
+    ? color
+        .map(c => {
+          const colorCode = c.hex || c;
+          return `
+ <span
+style="display:inline-block;width:32px;height:32px;background:${colorCode};border-radius:50%;margin-right:16px"></span>`;
+        })
+        .join('')
+    : `<li class="modal-color-item">—</li>`;
+  return `
+    <div class="product-info-wrapper">
+        <div class="modal-gallery-mobile-wrapper">
+            ${galleryMarkup}
+        </div>
+        <h2 class="modal-product-title">${name}</h2>
+        <p class="modal-product-category">${category.name}</p>
+        <p class="modal-product-price">${price} грн</p>
+        <div class="modal-rating-wrapper">
+              <div id="product-rating-container"></div>
+        </div>
+        <div class="modal-product-details">
+            <h3 class="modal-detail-heading">Колір</h3>
+            <ul class="modal-color-list">${colorMarkup}
+            </ul>
+            <p class="modal-product-description">${description}</p>
+            <p class="modal-product-size">Розміри: ${sizes}</p>
+        </div>
+        <button type="button" class="modal-order-btn">Перейти до замовлення</button>
+    </div>`;
+}
     
-    render({ title, images: [img], price: price });
-  } else {
-    render(product);
+function openProductModal() {
+  modalRefs.overlay.classList.add('is-open');
+  document.body.classList.add('modal-open');
+  document.darkOverlay.classList.add('is-visible');
+}
+function closeProductModal() {
+  modalRefs.overlay.classList.remove('is-open');
+  document.body.classList.remove('modal-open');
+  document.darkOverlay.classList.remove('is-visible');
+  modalRefs.contentWrapper.innerHTML = '';
+}
+function setupModalListeners() {
+  modalRefs.closeBtn.addEventListener('click', closeProductModal);
+  modalRefs.overlay.addEventListener('click', e => {
+    if (e.target === modalRefs.overlay) closeProductModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeProductModal();
+  });
+}
+
+async function handleCardClick(e) {
+  const btn = e.target.closest('.item-btn');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  try {
+    const data = await getFurnituresID(id);
+    modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
+    openProductModal();
+    /*
+    const finalRating = roundRating(data.rating);
+    const ratingInstance = new Raty(
+      document.getElementById('product-rating-container'),
+      {
+        starType: 'i',
+        starOff: 'icon-star',
+        starOn: 'icon-vector',
+        starHalf: 'icon-vector-1',
+        score: finalRating,
+        readOnly: true,
+        number: 5,
+      }
+    );
+    ratingInstance.init();
+    */
+  } catch (error) {
+    console.error('Failed to open modal:', error);
   }
-  open();
-});
-})();
+}
+export function setupCardOpenButtons() {
+  modalRefs.furnitureList.addEventListener('click', handleCardClick);
+  setupModalListeners();
+}
+async function init() {
+  try {
+    const items = await getFurnituresList();
+    renderFurniture(items, true);
+    setupCardOpenButtons();
+  } catch (err) {
+    console.error('Init error:', err);
+  }
+}
+init();
