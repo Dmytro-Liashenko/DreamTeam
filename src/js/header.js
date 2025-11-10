@@ -5,14 +5,16 @@ const refs = {
   mobaleNavList: document.querySelector('#mobile-nav'),
   navigation: document.querySelector('.navigation'),
   overlay: document.querySelector('#menu-overlay'),
-  btn: document.querySelector('.btn-header'),
+  desktopBtn: document.querySelector('#desktop-btn'),
+  mobileBtn: document.querySelector('#mobile-btn'),
 };
 
 refs.openBtn.addEventListener('click', openMobileMenu);
 refs.closeBtn.addEventListener('click', closeMobileMenu);
 document.addEventListener('keydown', handleEscKeyClose);
 document.addEventListener('click', handleOutsideClick);
-refs.btn.addEventListener('click', scrollToFurniture);
+refs.desktopBtn.addEventListener('click', scrollToFurniture);
+refs.mobileBtn.addEventListener('click', scrollToFurniture);
 
 function openMobileMenu() {
   refs.mobileMenu.classList.add('is-open');
@@ -58,10 +60,11 @@ function handleOutsideClick(evt) {
 }
 
 function scrollToFurniture() {
-  const targetSection = document.querySelector('#furniture');
+  const targetSection = document.querySelector('.furniture-section');
 
   targetSection.scrollIntoView({
     behavior: 'smooth',
   });
   closeMobileMenu();
+  refs.btn.blur();
 }

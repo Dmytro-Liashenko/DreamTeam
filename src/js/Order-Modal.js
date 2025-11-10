@@ -17,7 +17,7 @@ refs.modal.addEventListener('click', onModalClick);
 window.addEventListener('keydown', onEscClick);
 refs.form.addEventListener('submit', onFormSubmit);
 
-function toggleModal() {
+export function toggleModal() {
   refs.modal.classList.toggle('is-open');
   refs.body.classList.toggle('modal-open');
 }
