@@ -1,6 +1,8 @@
 import { getFurnituresList } from './products-api';
 import { renderFurniture } from './render-function';
 
+import { showLoader, hideLoader } from './loader.js';
+
 export const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.querySelector('.categories-list-item');
 const loadMoreBtn = document.querySelector('.load-more-btn');
@@ -12,6 +14,8 @@ let totalAvailable = 0;
 let selectedCategory = null;
 
 async function loadFurniture(page = 1, categoryId = null) {
+  showLoader(page > 1);
+  
   try {
     let url = `https://furniture-store-v2.b.goit.study/api/furnitures?page=${page}&limit=${limit}`;
     
@@ -36,6 +40,8 @@ async function loadFurniture(page = 1, categoryId = null) {
     }
   } catch (error) {
     console.error('Error loading furniture:', error);
+  } finally {
+    hideLoader();
   }
 }
 
@@ -56,3 +62,16 @@ loadMoreBtn.addEventListener('click', () => {
   currentPage++;
   loadFurniture(currentPage, selectedCategory);
 });
+
+
+const categories = document.querySelectorAll('.img-categories');
+
+categories.forEach(cat => {
+  cat.addEventListener('click', () => {
+    categories.forEach(c => c.classList.remove('active'));
+    cat.classList.add('active');
+  });
+});
+
+
+

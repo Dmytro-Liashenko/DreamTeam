@@ -5,16 +5,16 @@ export function renderFurniture(items, clearList = false) {
     .map(({ _id, images, name, color, price }) => {
       const imageSrc = images?.[0] || 'https://via.placeholder.com/300x200?text=No+Image';
       const colorDots = Array.isArray(color)
-        ? color.map(c => `<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${c};margin:0 2px;"></span>`).join('')
+        ? color.map(c => `<span style="display:inline-block;width:24px;height:24px;border-radius:50%;background:${c};margin:0 2px;"></span>`).join('')
         : '—';
 
       return `
         <li class="furniture-item" data-id="${_id}">
-          <img src="${imageSrc}" alt="${name}" style="width: 310px; height: 256px; object-fit: cover; border-radius: 8px;" />
-          <h3>${name}</h3>
-          <p>Кольори: ${colorDots}</p>
-          <p>Ціна: ${price} грн</p>
-          <a href="/product/${_id}">Детальніше</a>
+          <img class="furniture-item-img" src="${imageSrc}" alt="${name}" style="width: 310px; height: 256px; object-fit: cover; border-radius: 8px;" />
+          <h3 class="furniture-item-name">${name}</h3>
+          <p class="furniture-item-color">${colorDots}</p>
+          <p class="furniture-item-price">${price} грн</p>
+          <a href="/product/${_id}" class="furniture-item-more">Детальніше</a>
         </li>
       `;
     })
@@ -30,3 +30,5 @@ export function renderFurniture(items, clearList = false) {
 export function clearFurniture() {
   document.querySelector('.furniture-list').innerHTML = '';
 }
+
+// frame for categories
