@@ -15,7 +15,7 @@
     <script type="module" crossorigin src="/DreamTeam/index.js"></script>
     <link rel="modulepreload" crossorigin href="/DreamTeam/assets/vendor-D40M51PX.js">
     <link rel="stylesheet" crossorigin href="/DreamTeam/assets/vendor-DOArKK7h.css">
-    <link rel="stylesheet" crossorigin href="/DreamTeam/assets/index-Di76jk6Q.css">
+    <link rel="stylesheet" crossorigin href="/DreamTeam/assets/index-DIhdBw9_.css">
   </head>
   <body>
     <div class="loader hidden" id="global-loader"></div>
@@ -215,9 +215,9 @@
         <li data-category-id="66504a50a1b2c3d4e5f6a7be" class="categories-item"><p class="img-categories-text">Меблі для дитячої</p>
           <picture
             ><source
-              srcset="/img/image-categories/A-bright-and-playful-childrens-room-min.png 1x, /DreamTeam/assets/A-bright-and-playful-childrens-room@2x-min-DlZUBwTW.png 2x" />
+              srcset="/DreamTeam/assets/A-bright-and-playful-childrens-room-min-D2z96uFB.png 1x, /DreamTeam/assets/A-bright-and-playful-childrens-room@2x-min-DlZUBwTW.png 2x" />
             <img
-              src="/img/image-categories/A-bright-and-playful-childrens-room-min.png"
+              src="/DreamTeam/assets/A-bright-and-playful-childrens-room-min-D2z96uFB.png"
               class="img-categories"
               alt="children's-room"
               width="166"
@@ -516,35 +516,21 @@
   </div>
 </footer>
 
-    <div class="furn-modal-backdrop" id="furnitureModal" >
-    <div class="furn-modal" role="dialog" aria-modal="true" aria-labelledby="furn-modal-title">
-        <button class="furn-modal__close" type="button" aria-label="Закрити" data-close>
-            &times;
-        </button>
+    <div class="product-modal-overlay" data-modal-item>
+    <div class="container">
+        <div class="product-modal">
+            <button type="button" class="modal-close-btn" data-model-close>
+                <svg width="32" height="32">
+                    <use href="../img/icons.svg#icon-x-close">
+                    </use>
+                </svg>
+            </button>
 
-        <div class="furn-modal__body">
-            <div class="furn-modal__gallery">
-                <img class="furn-modal__main-img"
-                    src="" alt="" />
-                <ul class="furn-modal__thumbs" aria-label="Галерея зображень"></ul>
-            </div>
-            <div class="furn-modal__info">
-                <h3 class="furn-modal__title" id="furn-modal-title"></h3>
-                <p class="furn-modal__category"></p>
-                <div class="furn-modal__meta">
-                    <span class="furn-modal__price"></span>
-                    <div class="furn-modal__rating" aria-label="Оцінка"></div>
-                </div>
-                <form class="furn-modal__colors" aria-label="Доступні кольори"></form>
-                <p class="furn-modal__desc"></p>
-                <ul class="furn-modal__sizes" aria-label="Розміри"></ul>
-                <button class="furn-modal__order" type="button">
-                    Перейти до замовлення
-                </button>
-            </div>
+            <div class="modal-content-wrapper"></div>
         </div>
     </div>
 </div>
+<div class="menu-overlay" id="menu-overlay"></div>
     <button type="button" data-modal-open>open</button>
 <!--  -->
 <div class="modal-overlay" data-modal>
