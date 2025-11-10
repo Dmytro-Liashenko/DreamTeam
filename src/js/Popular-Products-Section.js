@@ -35,9 +35,11 @@ function addSlidesToSwiper(products) {
         nextEl: '.popular-button-next',
         prevEl: '.popular-button-prev',
         disabledClass: 'disabled-nav'
+        disabledClass: 'disabled-nav'
       },
       pagination: {
         el: '.popular-pagination',
+        clickable: true
         clickable: true
       },
       breakpoints: {
@@ -45,7 +47,24 @@ function addSlidesToSwiper(products) {
         768: { slidesPerView: 2, spaceBetween: 15 },
         1024: { slidesPerView: 3, spaceBetween: 20 }
       }
+        1024: { slidesPerView: 3, spaceBetween: 20 }
+      }
     });
+
+    swiper.update(); 
+
+    const prevBtn = document.querySelector('.popular-button-prev');
+    const nextBtn = document.querySelector('.popular-button-next');
+    const updateNavButtons = () => {
+      prevBtn.classList.toggle('disabled-nav', swiper.isBeginning);
+      nextBtn.classList.toggle('disabled-nav', swiper.isEnd);
+    };
+    swiper.on('slideChange', updateNavButtons);
+    swiper.on('init', updateNavButtons);
+    updateNavButtons();
+
+  } catch (error) {
+    console.error('Помилка завантаження популярних товарів:', error);
 
     swiper.update(); 
 
@@ -66,5 +85,6 @@ function addSlidesToSwiper(products) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadPopularFurniture();
   loadPopularFurniture();
 });
