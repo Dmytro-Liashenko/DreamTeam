@@ -1,7 +1,9 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 import Raty from 'raty-js';
-
+import starHalfUrl from "../img/star-icons/star-half.svg"
+import starOffUrl from "../img/star-icons/star-off.svg"
+import starOnUrl from "../img/star-icons/star-on.svg"
 import { getFeedback } from './products-api.js';
 
 const carousel = document.querySelector('.swiper-wrapper')
@@ -52,9 +54,9 @@ function initRatings() {
             numberMax: 5,
             precision: false,
             round: { down: 0.3, full: 0.7, up: 0.8 },
-            starOn: './img/star-icons/star-on.svg',
-            starHalf: './img/star-icons/star-half.svg',
-            starOff: './img/star-icons/star-off.svg',
+            starOn: starOnUrl,
+            starHalf: starHalfUrl,
+            starOff: starOffUrl,
         }).init();
     });
 }
