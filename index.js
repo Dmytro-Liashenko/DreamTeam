@@ -59,7 +59,7 @@ import{A as W,a as f,S as U,R as N,i as B}from"./assets/vendor-D40M51PX.js";(fun
             style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
       <h3 class="product-name">${t.name}</h3>
       <p>
-        ${t.color?t.color.map(o=>`<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:${o}; margin:0 2px;"></span>`).join(""):""}
+        ${t.color?t.color.map(o=>`<span style="display:inline-block; width:23px; height:23px; border-radius:50%; background:${o}; margin:0 2px;"></span>`).join(""):""}
       </p>
       <p class="product-price">${t.price} грн</p>
       <a class="more-info" href="/product/${t._id}">Детальніше</a>
