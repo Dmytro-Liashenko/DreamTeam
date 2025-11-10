@@ -36,12 +36,10 @@ export async function getFurnituresID(id) {
 }
 
 export async function getPopularItems(page = 1) {
-export async function getPopularItems(page) {
   try {
     const params = {
       type: "popular",
       limit: 4,
-      page
       page,
     }
 

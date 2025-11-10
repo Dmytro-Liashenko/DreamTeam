@@ -1,6 +1,6 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
-import { getPopularItems } from './products-api';
+import { getPopularItems } from './products-api.js';
 
 const wrapper = document.getElementById('popular-products-wrapper');
 let currentPage = 1;
