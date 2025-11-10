@@ -35,7 +35,7 @@ export async function getFurnituresID(id) {
   }
 }
 
-export async function getPopularItems(page = 1) {
+export async function getPopularItems() {
   try {
     const params = {
       type: "popular",
