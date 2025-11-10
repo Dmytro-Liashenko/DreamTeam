@@ -20,11 +20,38 @@ export const colorMarkup = color => {
     ? color
         .map(c => {
           const colorCode = c.hex || c;
-          return `<span style="display:inline-block;width:32px;height:32px;background:${colorCode};border-radius:50%;margin-right:16px"></span>`;
+          return `
+            <button 
+              class="color-button" 
+              data-color="${colorCode}"
+              style="
+                display:inline-block;
+                width:32px;
+                height:32px;
+                background:${colorCode};
+                border-radius:50%;
+                margin-right:16px;
+                border:2px solid transparent;
+                cursor:pointer;"
+            ></button>`;
         })
         .join('')
     : `<li class="modal-color-item">—</li>`;
 };
+
+function pickColor() {
+  const colorButtons = document.querySelectorAll('.color-button');
+
+  colorButtons.forEach(button => {
+    button.addEventListener('click', e => {
+      const selectedColor = e.currentTarget.dataset.color;
+      orderData.color = selectedColor;
+
+      colorButtons.forEach(btn => (btn.style.border = '3px solid transparent'));
+      e.currentTarget.style.border = '3px solid #000';
+    });
+  });
+}
 
 function createProductModalMarkup(item) {
   const { name, category, price, description, sizes, color, images } = item;
@@ -85,16 +112,19 @@ async function handleCardClick(e) {
   if (!btn) return;
 
   const id = btn.dataset.id;
+  orderData.modelId = id
 
   try {
     const data = await getFurnituresID(id);
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
+    pickColor();
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
     if (orderBtn) {
       orderBtn.addEventListener('click', () => {
         toggleModal();
+        closeProductModal()
       });
     }
 
@@ -113,7 +143,7 @@ async function init() {
   try {
     const items = await getFurnituresList();
     renderFurniture(items, true);
-    setupCardOpenButtons();
+    setupCardOpenButtons()
   } catch (err) {
     console.error('Init error:', err);
   }

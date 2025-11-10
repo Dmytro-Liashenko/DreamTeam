@@ -2,16 +2,15 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import { postUsersOrder } from './products-api';
+import { orderData } from './Furniture-Details-Modal';
 
 const refs = {
-  openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('[data-modal-close]'),
   modal: document.querySelector('[data-modal]'),
   body: document.querySelector('body'),
   form: document.querySelector('.modal-form'),
 };
 
-refs.openModalBtn.addEventListener('click', toggleModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
 refs.modal.addEventListener('click', onModalClick);
 window.addEventListener('keydown', onEscClick);
@@ -65,11 +64,14 @@ function onFormSubmit(event) {
 
   if (!isValid) return;
 
+  console.log(orderData.modelId);
+  console.log(orderData.color);
+
   postUsersOrder({
     name: nameValue,
     phone: phoneValue,
-    modelId: '',
-    color: '',
+    modelId: orderData.modelId,
+    color: orderData.color,
     comment: commentValue,
   })
     .then(res => {
