@@ -1,6 +1,12 @@
 import { renderFurniture } from './render-function';
 import { getFurnituresID, getFurnituresList } from './products-api';
 import { toggleModal } from './Order-Modal';
+import { initRatings } from './Feedback-Section';
+
+import Raty from 'raty-js';
+import starHalfUrl from "../img/star-icons/star-half.svg"
+import starOffUrl from "../img/star-icons/star-off.svg"
+import starOnUrl from "../img/star-icons/star-on.svg"
 
 const modalRefs = {
   overlay: document.querySelector('[data-modal-item]'),
@@ -20,6 +26,8 @@ export const colorMarkup = color => {
     ? color
         .map(c => {
           const colorCode = c.hex || c;
+          const borderStyle = colorCode === '#fff' ? 'border: 1px solid #ccc' : 'border: 1px solid transparent'
+
           return `
             <button 
               class="color-button" 
@@ -39,22 +47,63 @@ export const colorMarkup = color => {
     : `<li class="modal-color-item">—</li>`;
 };
 
+function initModalRating(score) {
+  const ratingContainer = document.querySelector('.product-rating-container');
+  if (!ratingContainer) return;
+
+  new Raty(ratingContainer, {
+    score: score || 0,
+    starSize: 20,
+    step: 0.5,
+    readOnly: true,
+    numberMax: 5,
+    precision: false,
+    round: { down: 0.3, full: 0.7, up: 0.8 },
+    starOn: starOnUrl,
+    starHalf: starHalfUrl,
+    starOff: starOffUrl,
+  }).init();
+}
+
+
+
 function pickColor() {
   const colorButtons = document.querySelectorAll('.color-button');
 
+  colorButtons.forEach(btn => {
+    const color = btn.dataset.color?.toLowerCase();
+    if (color === '#fff' || color === 'white') {
+      btn.style.border = '1px solid #838584'; 
+    } else {
+      btn.style.border = '3px solid transparent'; 
+    }
+  });
+
   colorButtons.forEach(button => {
     button.addEventListener('click', e => {
-      const selectedColor = e.currentTarget.dataset.color;
+      const selectedColor = e.currentTarget.dataset.color.toLowerCase();
       orderData.color = selectedColor;
 
-      colorButtons.forEach(btn => (btn.style.border = '3px solid transparent'));
-      e.currentTarget.style.border = '3px solid #000';
+      colorButtons.forEach(btn => {
+        const color = btn.dataset.color?.toLowerCase();
+        if (color === '#fff' || color === 'white') {
+          btn.style.border = '1px solid #838584';
+        } else {
+          btn.style.border = '3px solid transparent';
+        }
+      });
+
+      if (selectedColor === '#fff' || selectedColor === 'white') {
+        e.currentTarget.style.border = '2px solid #000'; 
+      } else {
+        e.currentTarget.style.border = '4px solid #838584'; 
+      }
     });
   });
 }
 
 function createProductModalMarkup(item) {
-  const { name, category, price, description, sizes, color, images } = item;
+  const { name, category, price, description, sizes, color, images,  } = item;
 
   const galleryMarkup = images
     .map(img => `<img src="${img}" alt="${name}" width="260">`)
@@ -65,24 +114,26 @@ function createProductModalMarkup(item) {
       <div class="modal-gallery-mobile-wrapper">
         ${galleryMarkup}
       </div>
-      <h2 class="modal-product-title">${name}</h2>
-      <p class="modal-product-category">${category.name}</p>
-      <p class="modal-product-price">${price} грн</p>
-      <div class="modal-rating-wrapper">
-        <div id="product-rating-container"></div>
-      </div>
-      <div class="modal-product-details">
+      <div class="furniture-content">
+        <h2 class="modal-product-title">${name}</h2>
+        <p class="modal-product-category">${category.name}</p>
+        <p class="modal-product-price">${price} грн</p>
+        <div class="modal-rating-wrapper">
+        <div class="product-rating-container small"></div>
+        </div>
+        <div class="modal-product-details">
         <h3 class="modal-detail-heading">Колір</h3>
         <ul class="modal-color-list">${colorMarkup(color)}</ul>
         <p class="modal-product-description">${description}</p>
         <p class="modal-product-size">Розміри: ${sizes}</p>
+        </div>
+        <button type="button" class="modal-order-btn">Перейти до замовлення</button>
       </div>
-      <button type="button" class="modal-order-btn">Перейти до замовлення</button>
     </div>
   `;
 }
 
-function openProductModal() {
+export function openProductModal() {
   modalRefs.overlay.classList.add('is-open');
   modalRefs.darkOverlay.classList.add('is-visible');
   document.body.classList.add('modal-open');
@@ -95,7 +146,7 @@ function closeProductModal() {
   modalRefs.contentWrapper.innerHTML = '';
 }
 
-function setupModalListeners() {
+export function setupModalListeners() {
   modalRefs.closeBtn.addEventListener('click', closeProductModal);
 
   modalRefs.overlay.addEventListener('click', e => {
@@ -107,8 +158,8 @@ function setupModalListeners() {
   });
 }
 
-async function handleCardClick(e) {
-  const btn = e.target.closest('.item-btn');
+export async function handleCardClick(e) {
+  const btn = e.target.closest('[data-id]');
   if (!btn) return;
 
   const id = btn.dataset.id;
@@ -119,6 +170,7 @@ async function handleCardClick(e) {
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
     pickColor();
+    initModalRating(data.rate)
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
     if (orderBtn) {

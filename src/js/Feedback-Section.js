@@ -42,8 +42,10 @@ const swiper = new Swiper('.feedback-swiper', {
     },
 });
 
-function initRatings() {
+
+export function initRatings() {
     document.querySelectorAll('.feedback-rating').forEach(elem => {
+
         new Raty(elem, {
             score: elem.dataset.score,
             starSize: 20,
