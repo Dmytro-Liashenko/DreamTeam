@@ -52,9 +52,9 @@ function initRatings() {
             numberMax: 5,
             precision: false,
             round: { down: 0.3, full: 0.7, up: 0.8 },
-            starOn: '/img/star-icons/star-on.svg',
-            starHalf: '/img/star-icons/star-half.svg',
-            starOff: '/img/star-icons/star-off.svg',
+            starOn: './img/star-icons/star-on.svg',
+            starHalf: './img/star-icons/star-half.svg',
+            starOff: './img/star-icons/star-off.svg',
         }).init();
     });
 }
