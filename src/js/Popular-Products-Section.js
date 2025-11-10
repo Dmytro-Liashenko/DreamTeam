@@ -35,18 +35,14 @@ function addSlidesToSwiper(products) {
         nextEl: '.popular-button-next',
         prevEl: '.popular-button-prev',
         disabledClass: 'disabled-nav'
-        disabledClass: 'disabled-nav'
       },
       pagination: {
         el: '.popular-pagination',
-        clickable: true
         clickable: true
       },
       breakpoints: {
         320: { slidesPerView: 1, spaceBetween: 10 },
         768: { slidesPerView: 2, spaceBetween: 15 },
-        1024: { slidesPerView: 3, spaceBetween: 20 }
-      }
         1024: { slidesPerView: 3, spaceBetween: 20 }
       }
     });
@@ -78,9 +74,6 @@ function addSlidesToSwiper(products) {
     swiper.on('init', updateNavButtons);
     updateNavButtons();
 
-  } catch (error) {
-    console.error('Помилка завантаження популярних товарів:', error);
-    wrapper.innerHTML = '<p>Не вдалося завантажити популярні товари.</p>';
   }
 }
 
