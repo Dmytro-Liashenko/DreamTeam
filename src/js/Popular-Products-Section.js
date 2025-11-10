@@ -10,7 +10,7 @@ function createSlideMarkup(products) {
   return products.map(product => `
     <div class="swiper-slide">
       <img src="${product.images[0]}" alt="${product.name}" 
-           style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
+            style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
       <h3 class="product-name">${product.name}</h3>
       <p>
         ${product.colors ? product.colors.map(c =>
@@ -67,13 +67,15 @@ function addSlidesToSwiper(products) {
 }
 
 async function loadPopularFurniture(page = 1) {
-  try {
+  try{
     const products = await getPopularItems(page);
-    if (!products || products.length === 0) return;
+    if(!products || products.length === 0) {
+      return;
+    } 
     addSlidesToSwiper(products);
   } catch (err) {
     console.error('Помилка завантаження популярних товарів:', err);
-    wrapper.innerHTML = '<p>Не вдалося завантажити популярні товари.</p>';
+    wrapper.innerHTML = '<p>Не вдалося завантажити популярні товари.</p>'
   }
 }
 

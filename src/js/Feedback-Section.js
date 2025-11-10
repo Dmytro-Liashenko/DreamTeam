@@ -43,7 +43,7 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-function initRatings() {
+export function initRatings() {
     document.querySelectorAll('.rating').forEach(elem => {
         new Raty(elem, {
             score: elem.dataset.score,
