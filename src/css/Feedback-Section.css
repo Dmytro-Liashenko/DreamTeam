@@ -25,12 +25,12 @@
     color: #080c09;
 }
 
-.rating {
+.feedback-rating {
     display: flex;
     flex-direction: row;
 }
 
-.comment-descr{
+.feedback-comment-descr{
     font-weight: 500;
     font-size: 20px;
     line-height: 1.6;
@@ -39,27 +39,27 @@
     margin: 24px 0;
 }
 
-.comment-name{
+.feedback-comment-name{
     font-weight: 700;
     font-size: 16px;
     line-height: 1.6;
     color: #080c09;
 }
 
-.comment-card {
+.feedback-comment-card {
     max-width: 335px;
     max-height: 266px;
 
     margin-bottom: 48px;
 }
 
-.swiper-slide {
+.feedback-swiper-slide {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.btn-wrapper{
+.feedback-btn-wrapper{
     display: flex;
     gap: 16px;
     flex-direction: row;
@@ -67,8 +67,8 @@
     width: 112px;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
+.feedback-swiper-button-next,
+.feedback-swiper-button-prev {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,8 +94,8 @@
             inset 0 32px 24px 0 rgba(8, 12, 9, 0.05);
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
+.feedback-swiper-button-next:hover,
+.feedback-swiper-button-prev:hover {
     background-color: #975052;
         box-shadow:
             0 4px 12px rgba(107, 6, 9, 0.3),
@@ -106,8 +106,8 @@
     fill: #fff;
 }
 
-.swiper-button-next:focus,
-.swiper-button-prev:focus {
+.feedback-swiper-button-next:focus,
+.feedback-swiper-button-prev:focus {
     background-color: #975052;
     box-shadow:
             0 4px 12px rgba(107, 6, 9, 0.3),
@@ -118,19 +118,19 @@
     fill: #fff;
 }
 
-.swiper-button-next:disabled,
-.swiper-button-prev:disabled {
+.feedback-swiper-button-next:disabled,
+.feedback-swiper-button-prev:disabled {
     background: #f2f2f2;
     opacity: 0.3;
     fill: #080c09;
     cursor: no-drop;
 }
 
-.swiper-pagination{
+.feedback-pagination{
     display: flex;
 }
 
-.swiper-pagination-bullet {
+.feedback-pagination .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
     opacity: 1;
@@ -140,11 +140,11 @@
     margin: 0 4px;
 }
 
-.swiper-pagination-bullet-active {
+.feedback-pagination .swiper-pagination-bullet-active {
     background-color: #080c09;
 }
 
-.swiper-interaction-wrapp{
+.feedback-swiper-interaction-wrapp{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -157,11 +157,11 @@
         padding: 32px;
     }
 
-    .swiper-slide {
+    .feedback-swiper-slide {
         gap: 24px;
     }
 
-    .comment-card {
+    .feedback-comment-card {
         max-width: 341px;
     }
 }
@@ -177,7 +177,7 @@
         font-size: 48px;
     }
 
-    .comment-card {
+    .feedback-comment-card {
         max-width: 421px;
     
         margin-bottom: 48px;
