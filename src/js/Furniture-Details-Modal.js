@@ -3,11 +3,27 @@ import { getFurnituresID, getFurnituresList } from './products-api';
 import { toggleModal } from './Order-Modal';
 
 const modalRefs = {
-  overlay: document.querySelector('[data-modal-item]'), 
-  darkOverlay: document.querySelector('#menu-overlay'), 
-  closeBtn: document.querySelector('[data-modal-close]'),
+  overlay: document.querySelector('[data-modal-item]'),
+  darkOverlay: document.querySelector('#menu-overlay'),
+  closeBtn: document.querySelector('[data-modal-close-furniture]'),
   contentWrapper: document.querySelector('.modal-content-wrapper'),
   furnitureList: document.querySelector('.furniture-list'),
+};
+
+export const orderData = {
+  modelId: null,
+  color: null,
+};
+
+export const colorMarkup = color => {
+  return Array.isArray(color)
+    ? color
+        .map(c => {
+          const colorCode = c.hex || c;
+          return `<span style="display:inline-block;width:32px;height:32px;background:${colorCode};border-radius:50%;margin-right:16px"></span>`;
+        })
+        .join('')
+    : `<li class="modal-color-item">—</li>`;
 };
 
 function createProductModalMarkup(item) {
@@ -16,15 +32,6 @@ function createProductModalMarkup(item) {
   const galleryMarkup = images
     .map(img => `<img src="${img}" alt="${name}" width="260">`)
     .join('');
-
-  const colorMarkup = Array.isArray(color)
-    ? color
-        .map(c => {
-          const colorCode = c.hex || c;
-          return `<span style="display:inline-block;width:32px;height:32px;background:${colorCode};border-radius:50%;margin-right:16px"></span>`;
-        })
-        .join('')
-    : `<li class="modal-color-item">—</li>`;
 
   return `
     <div class="product-info-wrapper">
@@ -39,7 +46,7 @@ function createProductModalMarkup(item) {
       </div>
       <div class="modal-product-details">
         <h3 class="modal-detail-heading">Колір</h3>
-        <ul class="modal-color-list">${colorMarkup}</ul>
+        <ul class="modal-color-list">${colorMarkup(color)}</ul>
         <p class="modal-product-description">${description}</p>
         <p class="modal-product-size">Розміри: ${sizes}</p>
       </div>
@@ -62,7 +69,6 @@ function closeProductModal() {
 }
 
 function setupModalListeners() {
-  // По кнопке закрытия
   modalRefs.closeBtn.addEventListener('click', closeProductModal);
 
   modalRefs.overlay.addEventListener('click', e => {
@@ -93,7 +99,6 @@ async function handleCardClick(e) {
     }
 
     openProductModal();
-
   } catch (error) {
     console.error('Failed to open modal:', error);
   }
