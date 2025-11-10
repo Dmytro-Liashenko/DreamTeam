@@ -275,3 +275,10 @@
       transform: translateY(-1px);
     }
   }
+  .img-categories.active {
+
+
+    outline: 8px solid #6b0609;
+
+
+  } 
