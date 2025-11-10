@@ -25,12 +25,15 @@
   flex-direction: column;
   gap: 16px;
   max-width: 280px;
+  padding-bottom: 48px;
 }
 
 .popular-swiper .product-name {
   font-weight: 600;
   font-size: 18px;
   line-height: 1.6;
+  height: 40px;
+  padding-bottom: 8px;
 }
 
 .popular-swiper .product-price {
