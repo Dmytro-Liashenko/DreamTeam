@@ -24,22 +24,35 @@ function createSlideMarkup(products) {
 }
 
 function addSlidesToSwiper(products) {
-  if (!swiper) {
-    wrapper.innerHTML = createSlideMarkup(products);
-    swiper = new Swiper('.popular-swiper', {
-      slidesPerView: 4,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: '.popular-button-next',
-        prevEl: '.popular-button-prev',
-        disabledClass: 'disabled-nav'
+ if (!swiper) {
+  wrapper.innerHTML = createSlideMarkup(products);
+  swiper = new Swiper('.popular-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    navigation: {
+      nextEl: '.popular-button-next',
+      prevEl: '.popular-button-prev',
+      disabledClass: 'disabled-nav'
+    },
+    pagination: {
+      el: '.popular-pagination',
+      clickable: true
+    },
+    breakpoints: {
+      768: {  
+        slidesPerView: 2,
+        spaceBetween: 20
       },
-      pagination: {
-        el: '.popular-pagination',
-        clickable: true
+      1440: { 
+        slidesPerView: 4,
+        spaceBetween: 20
       }
-    });
+    }
+  });
+
+
+
 
     const prevBtn = document.querySelector('.popular-button-prev');
     const nextBtn = document.querySelector('.popular-button-next');
