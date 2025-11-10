@@ -9,8 +9,8 @@ let swiper;
 function createSlideMarkup(products) {
   return products.map(product => `
     <div class="swiper-slide">
-      <img src="${product.images[0]}" alt="${product.name}"
-           style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
+      <img src="${product.images[0]}" alt="${product.name}" 
+            style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
       <h3 class="product-name">${product.name}</h3>
       <p>
         ${product.color ? product.color.map(c =>

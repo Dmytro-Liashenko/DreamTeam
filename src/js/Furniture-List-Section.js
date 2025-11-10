@@ -5,7 +5,7 @@ import { showLoader, hideLoader } from './loader.js';
 
 export const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.querySelector('.categories-list-item');
-const loadMoreBtn = document.querySelector('.load-more-btn');
+const loadMoreBtn = document.querySelector('.load-more-btn-furniture');
 
 let currentPage = 1;
 const limit = 8;
