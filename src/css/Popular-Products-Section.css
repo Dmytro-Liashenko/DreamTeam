@@ -25,12 +25,15 @@
   flex-direction: column;
   gap: 16px;
   max-width: 280px;
+  padding-bottom: 48px;
 }
 
 .popular-swiper .product-name {
   font-weight: 600;
   font-size: 18px;
   line-height: 1.6;
+  height: 40px;
+  padding-bottom: 8px;
 }
 
 .popular-swiper .product-price {
@@ -107,6 +110,18 @@
 .popular-pagination {
   display: flex;
   margin-right: auto;
+}
+.popular-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    opacity: 1;
+    border-radius: 100%;
+    background-color: #C9C9C9;
+    margin: 0 4px;
+}
+
+.popular-pagination .swiper-pagination-bullet-active {
+    background-color: #080c09;
 }
 
 .popular-swiper-controls {
