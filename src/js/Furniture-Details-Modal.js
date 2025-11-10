@@ -3,12 +3,55 @@ import { getFurnituresID, getFurnituresList } from './products-api';
 import { toggleModal } from './Order-Modal';
 
 const modalRefs = {
-  overlay: document.querySelector('[data-modal-item]'), 
-  darkOverlay: document.querySelector('#menu-overlay'), 
-  closeBtn: document.querySelector('[data-modal-close]'),
+  overlay: document.querySelector('[data-modal-item]'),
+  darkOverlay: document.querySelector('#menu-overlay'),
+  closeBtn: document.querySelector('[data-modal-close-furniture]'),
   contentWrapper: document.querySelector('.modal-content-wrapper'),
   furnitureList: document.querySelector('.furniture-list'),
 };
+
+export const orderData = {
+  modelId: null,
+  color: null,
+};
+
+export const colorMarkup = color => {
+  return Array.isArray(color)
+    ? color
+        .map(c => {
+          const colorCode = c.hex || c;
+          return `
+            <button 
+              class="color-button" 
+              data-color="${colorCode}"
+              style="
+                display:inline-block;
+                width:32px;
+                height:32px;
+                background:${colorCode};
+                border-radius:50%;
+                margin-right:16px;
+                border:2px solid transparent;
+                cursor:pointer;"
+            ></button>`;
+        })
+        .join('')
+    : `<li class="modal-color-item">—</li>`;
+};
+
+function pickColor() {
+  const colorButtons = document.querySelectorAll('.color-button');
+
+  colorButtons.forEach(button => {
+    button.addEventListener('click', e => {
+      const selectedColor = e.currentTarget.dataset.color;
+      orderData.color = selectedColor;
+
+      colorButtons.forEach(btn => (btn.style.border = '3px solid transparent'));
+      e.currentTarget.style.border = '3px solid #000';
+    });
+  });
+}
 
 function createProductModalMarkup(item) {
   const { name, category, price, description, sizes, color, images } = item;
@@ -16,15 +59,6 @@ function createProductModalMarkup(item) {
   const galleryMarkup = images
     .map(img => `<img src="${img}" alt="${name}" width="260">`)
     .join('');
-
-  const colorMarkup = Array.isArray(color)
-    ? color
-        .map(c => {
-          const colorCode = c.hex || c;
-          return `<span style="display:inline-block;width:32px;height:32px;background:${colorCode};border-radius:50%;margin-right:16px"></span>`;
-        })
-        .join('')
-    : `<li class="modal-color-item">—</li>`;
 
   return `
     <div class="product-info-wrapper">
@@ -39,7 +73,7 @@ function createProductModalMarkup(item) {
       </div>
       <div class="modal-product-details">
         <h3 class="modal-detail-heading">Колір</h3>
-        <ul class="modal-color-list">${colorMarkup}</ul>
+        <ul class="modal-color-list">${colorMarkup(color)}</ul>
         <p class="modal-product-description">${description}</p>
         <p class="modal-product-size">Розміри: ${sizes}</p>
       </div>
@@ -62,7 +96,6 @@ function closeProductModal() {
 }
 
 function setupModalListeners() {
-  // По кнопке закрытия
   modalRefs.closeBtn.addEventListener('click', closeProductModal);
 
   modalRefs.overlay.addEventListener('click', e => {
@@ -79,21 +112,23 @@ async function handleCardClick(e) {
   if (!btn) return;
 
   const id = btn.dataset.id;
+  orderData.modelId = id
 
   try {
     const data = await getFurnituresID(id);
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
+    pickColor();
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
     if (orderBtn) {
       orderBtn.addEventListener('click', () => {
         toggleModal();
+        closeProductModal()
       });
     }
 
     openProductModal();
-
   } catch (error) {
     console.error('Failed to open modal:', error);
   }
@@ -108,7 +143,7 @@ async function init() {
   try {
     const items = await getFurnituresList();
     renderFurniture(items, true);
-    setupCardOpenButtons();
+    setupCardOpenButtons()
   } catch (err) {
     console.error('Init error:', err);
   }
