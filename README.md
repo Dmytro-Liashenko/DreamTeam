@@ -24,6 +24,8 @@
 Клонувати репозиторій:
    ```bash
    git clone https://github.com/Dmytro-Liashenko/DreamTeam
+
+   npm install
     
 ## Acknowledgements
 
