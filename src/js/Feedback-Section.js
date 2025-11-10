@@ -41,8 +41,6 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-// Відмальовка зірочок не працює
-
 function initRatings() {
     document.querySelectorAll('.rating').forEach(elem => {
         new Raty(elem, {
@@ -54,11 +52,10 @@ function initRatings() {
             numberMax: 5,
             precision: false,
             round: { down: 0.3, full: 0.7, up: 0.8 },
-            path: './img/star-icons',
-            starOn: 'star-full.png',
-            starHalf: 'star-half.png',
-            starOff,
-        });
+            starOn: '/img/star-icons/star-on.svg',
+            starHalf: '/img/star-icons/star-half.svg',
+            starOff: '/img/star-icons/star-off.svg',
+        }).init();
     });
 }
 

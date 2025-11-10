@@ -1,0 +1,81 @@
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(#0000 30%, #6b0609);
+    mask:
+        radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0),
+        radial-gradient(farthest-side, #6b0609 94%, #0000) top/8px 8px no-repeat;
+    -webkit-mask:
+        radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0),
+        radial-gradient(farthest-side, #6b0609 94%, #0000) top/8px 8px no-repeat;
+    animation: spin 1s infinite linear;
+}
+
+.loader.hidden,
+.btn-loader.hidden {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.btn-loader {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: conic-gradient(#0000 30%, #6b0609);
+    mask:
+        radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0),
+        radial-gradient(farthest-side, #6b0609 94%, #0000) top/3px 3px no-repeat;
+    -webkit-mask:
+        radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0),
+        radial-gradient(farthest-side, #6b0609 94%, #0000) top/3px 3px no-repeat;
+    animation: spin 1s infinite linear;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #6b0609;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 20px auto;
+    transition: background 0.3s;
+    font-family: inherit;
+}
+
+.load-more-btn:hover {
+    background: #6b0609;
+}
+
+.load-more-btn.loading .btn-text {
+    opacity: 0;
+}
+
+.load-more-btn.loading .btn-loader {
+    display: inline-block;
+    opacity: 1;
+    visibility: visible;
+}
+
+

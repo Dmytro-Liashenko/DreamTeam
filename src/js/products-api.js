@@ -86,9 +86,3 @@ export async function getFeedback(page) {
 
   }
 }
-
-// console.log(await getFurnituresList("66504a50a1b2c3d4e5f6a7b9"));
-// console.log(await getCategory());
-console.log(await getFurnituresID("682f9bbf8acbdf505592ac42"));
-console.log(await getPopularItems(1));
-console.log(await getPopularItems(2));
