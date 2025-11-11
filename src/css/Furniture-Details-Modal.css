@@ -11,6 +11,10 @@
   pointer-events: none;
   transition: opacity 300ms ease, visibility 300ms ease;
   overflow-y: auto;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .product-modal-overlay.is-open {
@@ -248,10 +252,6 @@ body.modal-open {
 
   .modal-product-title {
     font-size: 40px;
-  }
-
-  .modal-product-title {
-    font-size: 32px;
   }
 
   .modal-product-description,

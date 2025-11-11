@@ -4,9 +4,9 @@ import { toggleModal } from './Order-Modal';
 import { initRatings } from './Feedback-Section';
 
 import Raty from 'raty-js';
-import starHalfUrl from "../img/star-icons/star-half.svg"
-import starOffUrl from "../img/star-icons/star-off.svg"
-import starOnUrl from "../img/star-icons/star-on.svg"
+import starHalfUrl from '../img/star-icons/star-half.svg';
+import starOffUrl from '../img/star-icons/star-off.svg';
+import starOnUrl from '../img/star-icons/star-on.svg';
 
 const modalRefs = {
   overlay: document.querySelector('[data-modal-item]'),
@@ -26,22 +26,6 @@ export const colorMarkup = color => {
     ? color
         .map(c => {
           const colorCode = c.hex || c;
-          const borderStyle = colorCode === '#fff' ? 'border: 1px solid #ccc' : 'border: 1px solid transparent'
-
-          return `
-            <button 
-              class="color-button" 
-              data-color="${colorCode}"
-              style="
-                display:inline-block;
-                width:32px;
-                height:32px;
-                background:${colorCode};
-                border-radius:50%;
-                margin-right:16px;
-                border:2px solid transparent;
-                cursor:pointer;"
-            ></button>`;
         })
         .join('')
     : `<li class="modal-color-item">—</li>`;
@@ -65,17 +49,15 @@ function initModalRating(score) {
   }).init();
 }
 
-
-
 function pickColor() {
   const colorButtons = document.querySelectorAll('.color-button');
 
   colorButtons.forEach(btn => {
     const color = btn.dataset.color?.toLowerCase();
     if (color === '#fff' || color === 'white') {
-      btn.style.border = '1px solid #838584'; 
+      btn.style.border = '1px solid #838584';
     } else {
-      btn.style.border = '3px solid transparent'; 
+      btn.style.border = '3px solid transparent';
     }
   });
 
@@ -94,16 +76,16 @@ function pickColor() {
       });
 
       if (selectedColor === '#fff' || selectedColor === 'white') {
-        e.currentTarget.style.border = '2px solid #000'; 
+        e.currentTarget.style.border = '2px solid #000';
       } else {
-        e.currentTarget.style.border = '4px solid #838584'; 
+        e.currentTarget.style.border = '4px solid #838584';
       }
     });
   });
 }
 
-function createProductModalMarkup(item) {
-  const { name, category, price, description, sizes, color, images,  } = item;
+export function createProductModalMarkup(item) {
+  const { name, category, price, description, sizes, color, images } = item;
 
   const galleryMarkup = images
     .map(img => `<img src="${img}" alt="${name}" width="260">`)
@@ -163,20 +145,25 @@ export async function handleCardClick(e) {
   if (!btn) return;
 
   const id = btn.dataset.id;
-  orderData.modelId = id
+  orderData.modelId = id;
 
   try {
     const data = await getFurnituresID(id);
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
     pickColor();
-    initModalRating(data.rate)
+    const firstColorButton =
+      modalRefs.contentWrapper.querySelector('.color-button');
+    if (firstColorButton) {
+      firstColorButton.click();
+    }
+    initModalRating(data.rate);
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
     if (orderBtn) {
       orderBtn.addEventListener('click', () => {
         toggleModal();
-        closeProductModal()
+        closeProductModal();
       });
     }
 
@@ -195,7 +182,7 @@ async function init() {
   try {
     const items = await getFurnituresList();
     renderFurniture(items, true);
-    setupCardOpenButtons()
+    setupCardOpenButtons();
   } catch (err) {
     console.error('Init error:', err);
   }
