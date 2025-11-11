@@ -25,7 +25,7 @@
   flex-direction: column;
   gap: 16px;
   max-width: 280px;
-  padding-bottom: 48px;
+  
 }
 
 .popular-swiper .product-name {
@@ -134,7 +134,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 48px;
   gap: 16px;
 }
 

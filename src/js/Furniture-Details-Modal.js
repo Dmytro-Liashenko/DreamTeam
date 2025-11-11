@@ -85,7 +85,7 @@ function pickColor() {
   });
 }
 
-export function createProductModalMarkup(item) {
+function createProductModalMarkup(item) {
   const { name, category, price, description, sizes, color, images } = item;
 
   const galleryMarkup = images
@@ -159,13 +159,14 @@ export async function handleCardClick(e) {
     if (firstColorButton) {
       firstColorButton.click();
     }
+
     initModalRating(data.rate);
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
     if (orderBtn) {
       orderBtn.addEventListener('click', () => {
-        toggleModal();
         closeProductModal();
+        toggleModal();
       });
     }
 
