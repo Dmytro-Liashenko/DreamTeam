@@ -18,12 +18,12 @@ refs.form.addEventListener('submit', onFormSubmit);
 
 export function toggleModal() {
   refs.modal.classList.toggle('is-open');
-  refs.body.classList.toggle('modal-open');
+  document.documentElement.classList.toggle('modal-open');
 }
 
 function closeModal() {
   refs.modal.classList.remove('is-open');
-  refs.body.classList.remove('modal-open');
+  document.documentElement.classList.remove('modal-open');
 }
 
 function onModalClick(event) {
@@ -63,10 +63,6 @@ function onFormSubmit(event) {
   }
 
   if (!isValid) return;
-
-  // console.log(orderData.modelId);
-  // console.log(orderData.color);
-  // console.log(commentValue);
 
   postUsersOrder({
     name: nameValue,

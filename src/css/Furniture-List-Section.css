@@ -319,10 +319,10 @@
   }
 }
 
-.img-categories.active {
-
-
+/* .categories-list-item.active .img-categories {
   outline: 8px solid #6b0609;
+} */
 
-
+.img-categories.active {
+  outline: 8px solid #6b0609;
 }

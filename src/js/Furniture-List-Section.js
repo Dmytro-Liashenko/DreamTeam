@@ -1,11 +1,10 @@
 import { renderFurniture } from './render-function';
 import { showLoader, hideLoader } from './loader.js';
+import iziToast from 'izitoast';
 
 export const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.querySelector('.categories-list');
 const loadMoreBtn = document.querySelector('.load-more-btn-furniture');
-
-const noFurnitureMessage = document.querySelector('.no-furniture-message');
 
 let currentPage = 1;
 const limit = 8;
@@ -21,10 +20,6 @@ async function loadFurniture(
   previousActiveLi = null
 ) {
   showLoader(page > 1);
-
-  if (page === 1) {
-    noFurnitureMessage.style.display = 'none';
-  }
 
   try {
     let url = `https://furniture-store-v2.b.goit.study/api/furnitures?page=${page}&limit=${limit}`;
@@ -53,13 +48,12 @@ async function loadFurniture(
         currentActiveCategoryLi = null;
       }
 
-      noFurnitureMessage.style.display = 'block';
       loadMoreBtn.style.display = 'none';
       furnitureList.innerHTML = '';
       totalLoaded = 0;
+
       return;
     }
-    noFurnitureMessage.style.display = 'none';
 
     totalLoaded += furnitures.length;
 
@@ -70,11 +64,25 @@ async function loadFurniture(
     }
   } catch (error) {
     console.error('Error loading furniture:', error);
-    noFurnitureMessage.style.display = 'block';
 
     loadMoreBtn.style.display = 'none';
 
     furnitureList.innerHTML = '';
+
+    iziToast.error({
+      title: 'Помилка',
+      message:
+        'Не вдалося завантажити товари. Перевірте інтернет-зʼєднання або спробуйте пізніше.',
+      position: 'topRight',
+      timeout: 5000,
+      backgroundColor: '#6b0609',
+      messageColor: '#fff',
+      titleColor: '#fff',
+      icon: 'fa-solid fa-triangle-exclamation',
+      progressBarColor: '#fff',
+      transitionIn: 'fadeInDown',
+      transitionOut: 'fadeOutUp',
+    });
 
     if (previousActiveLi) {
       currentActiveCategoryLi.classList.remove('active');
@@ -93,8 +101,14 @@ categoriesList.addEventListener('click', e => {
 
   categoriesList.querySelectorAll('li[data-category-id]').forEach(el => {
     el.classList.remove('active');
+    const img = el.querySelector('.img-categories');
+    if (img) img.classList.remove('active');
   });
+
   li.classList.add('active');
+  const img = li.querySelector('.img-categories');
+  if (img) img.classList.add('active');
+
   currentActiveCategoryLi = li;
 
   selectedCategory = li.dataset.categoryId;
@@ -104,14 +118,22 @@ categoriesList.addEventListener('click', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const initialActiveLi =
+  let initialActiveLi =
     categoriesList.querySelector('.active') ||
     categoriesList.querySelector('li[data-category-id]');
+
+  if (!initialActiveLi) {
+    initialActiveLi = categoriesList.querySelector('li[data-category-id]');
+  }
+
   if (initialActiveLi) {
     initialActiveLi.classList.add('active');
     currentActiveCategoryLi = initialActiveLi;
     selectedCategory = initialActiveLi.dataset.categoryId;
+  } else {
+    selectedCategory = 'all';
   }
+
   loadFurniture(currentPage, selectedCategory);
 });
 
