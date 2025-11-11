@@ -22,9 +22,7 @@ padding: 48px 0;
     text-align: center; 
     margin-bottom: 32px;
 }
-.accordion-container {
-min-width: 335px;
-}
+
 @media only screen and (min-width: 768px) {
     .accordion-container {
         max-width: 704px;

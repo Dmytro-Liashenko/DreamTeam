@@ -1,5 +1,10 @@
+
+import { furnitureList } from "./Furniture-List-Section";
+import { getCategory } from "./products-api";
 import { colorMarkup } from './Furniture-Details-Modal';
-import { furnitureList } from './Furniture-List-Section';
+
+const categoriesList = document.getElementById('categories-list-item');
+
 
 export function renderFurniture(items, clearList = false) {
   const html = items
@@ -34,4 +39,46 @@ export function clearFurniture() {
   document.querySelector('.furniture-list').innerHTML = '';
 }
 
-// frame for categories
+
+async function fillCategoryText() {
+  try {
+    const categories = await getCategory(); 
+
+    const order = [
+      "М'які меблі",
+      "Шафи та системи зберігання",
+      "Ліжка та матраци",
+      "Столи",
+      "Стільці та табурети",
+      "Кухні",
+      "Меблі для дитячої",
+      "Меблі для офісу",
+      "Меблі для передпокою",
+      "Меблі для ванної кімнати",
+      "Садові та вуличні меблі",
+      "Декор та аксесуари",
+    ];
+
+    const sortedCategories = order
+      .map(name => categories.find(c => c.name === name))
+      .filter(Boolean);
+
+    const items = document.querySelectorAll(".categories-item");
+
+    sortedCategories.forEach((category, index) => {
+      const item = items[index + 1]; 
+      if (!item) return;
+
+      const textEl = item.querySelector(".img-categories-text");
+      if (textEl) textEl.textContent = category.name;
+
+      item.dataset.categoryId = category._id;
+    });
+
+  } catch (error) {
+    console.error("Помилка при завантаженні категорій:", error);
+  }
+}
+
+fillCategoryText();
+

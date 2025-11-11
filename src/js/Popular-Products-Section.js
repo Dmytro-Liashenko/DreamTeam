@@ -92,17 +92,4 @@ async function loadPopularFurniture(page = 1) {
 document.addEventListener('DOMContentLoaded', () => {
   loadPopularFurniture(currentPage);
 
-  document
-    .querySelector('.popular-button-next')
-    .addEventListener('click', async () => {
-      currentPage++;
-      await loadPopularFurniture(currentPage);
-      swiper.slideNext();
-    });
-
-  document
-    .querySelector('.popular-button-prev')
-    .addEventListener('click', () => {
-      swiper.slidePrev();
-    });
 });
