@@ -26,6 +26,25 @@ export const colorMarkup = color => {
     ? color
         .map(c => {
           const colorCode = c.hex || c;
+          const borderStyle =
+            colorCode === '#fff'
+              ? 'border: 1px solid #ccc'
+              : 'border: 1px solid transparent';
+
+          return `
+            <button 
+              class="color-button" 
+              data-color="${colorCode}"
+              style="
+                display:inline-block;
+                width:32px;
+                height:32px;
+                background:${colorCode};
+                border-radius:50%;
+                margin-right:16px;
+                ${borderStyle}
+                cursor:pointer;"
+            ></button>`;
         })
         .join('')
     : `<li class="modal-color-item">—</li>`;
