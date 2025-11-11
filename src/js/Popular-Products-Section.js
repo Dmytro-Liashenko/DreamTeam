@@ -24,7 +24,7 @@ function createSlideMarkup(products) {
 }
 
 function addSlidesToSwiper(products) {
- if (!swiper) {
+  if (!swiper) {
   wrapper.innerHTML = createSlideMarkup(products);
   swiper = new Swiper('.popular-swiper', {
     slidesPerView: 1,
@@ -50,10 +50,6 @@ function addSlidesToSwiper(products) {
       }
     }
   });
-
-
-
-
     const prevBtn = document.querySelector('.popular-button-prev');
     const nextBtn = document.querySelector('.popular-button-next');
     const updateNavButtons = () => {
@@ -92,14 +88,4 @@ async function loadPopularFurniture(page = 1) {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadPopularFurniture(currentPage);
-
-  document.querySelector('.popular-button-next').addEventListener('click', async () => {
-    currentPage++;
-    await loadPopularFurniture(currentPage);
-    swiper.slideNext();
-  });
-
-  document.querySelector('.popular-button-prev').addEventListener('click', () => {
-    swiper.slidePrev();
-  });
 });

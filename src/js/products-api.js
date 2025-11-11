@@ -39,7 +39,7 @@ export async function getPopularItems(page = 1) {
   try {
     const params = {
       type: "popular",
-      limit: 4,
+      limit: 10,
       page,
     }
 
