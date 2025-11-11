@@ -71,8 +71,7 @@ async function loadFurniture(
 
     iziToast.error({
       title: 'Помилка',
-      message:
-        'Не вдалося завантажити товари. Перевірте інтернет-зʼєднання або спробуйте пізніше.',
+      message: 'Не вдалося завантажити товари. Спробуйте пізніше.',
       position: 'topRight',
       timeout: 5000,
       backgroundColor: '#6b0609',
@@ -96,11 +95,11 @@ async function loadFurniture(
 
 categoriesList.addEventListener('click', e => {
   if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-  window.scrollBy({
-    top: 1200,
-    behavior: "smooth",
-  });
-}
+    window.scrollBy({
+      top: 1200,
+      behavior: 'smooth',
+    });
+  }
 
   const li = e.target.closest('li[data-category-id]');
   if (!li) return;
