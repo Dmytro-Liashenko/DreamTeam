@@ -43,8 +43,6 @@ textarea:focus::placeholder {
   background-color: #fff;
   max-width: 335px;
   width: 100%;
-  /* max-height: 703px;
-  height: 100%; */
   max-height: calc(100% - 40px);
   border-radius: 8px;
   padding: 64px 20px;
@@ -55,8 +53,6 @@ html.modal-open,
 body.modal-open {
   overflow: hidden !important;
 }
-
-
 
 .close-button {
   position: absolute;
@@ -112,6 +108,7 @@ body.modal-open {
   width: 295px;
   height: 42px;
   transition: border-color 0.3s ease, background-color 0.3s ease;
+  resize: none;
 }
 
 .modal-form-input:focus {
