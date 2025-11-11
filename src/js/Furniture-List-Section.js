@@ -71,8 +71,7 @@ async function loadFurniture(
 
     iziToast.error({
       title: 'Помилка',
-      message:
-        'Не вдалося завантажити товари. Перевірте інтернет-зʼєднання або спробуйте пізніше.',
+      message: 'Не вдалося завантажити товари. Спробуйте пізніше.',
       position: 'topRight',
       timeout: 5000,
       backgroundColor: '#6b0609',
