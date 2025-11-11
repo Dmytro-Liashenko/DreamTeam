@@ -133,7 +133,9 @@ export function setupModalListeners() {
   modalRefs.closeBtn.addEventListener('click', closeProductModal);
 
   modalRefs.overlay.addEventListener('click', e => {
-    if (e.target === modalRefs.overlay) closeProductModal();
+    if (!e.target.closest('.product-modal')) {
+      closeProductModal();
+    }
   });
 
   document.addEventListener('keydown', e => {
