@@ -1,7 +1,8 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 import { getPopularItems } from './products-api.js';
-import { colorMarkup, handleCardClick } from './Furniture-Details-Modal.js';
+import { handleCardClick } from './Furniture-Details-Modal.js';
+import { colorIndicatorMarkup } from './render-function.js';
 
 const wrapper = document.getElementById('popular-products-wrapper');
 let currentPage = 1;
@@ -16,7 +17,7 @@ function createSlideMarkup(products) {
             style="width:100%; height:256px; object-fit:cover; border-radius:8px;" />
       <h3 class="product-name">${product.name}</h3>
       <p>
-        ${colorMarkup(product.color)}
+        ${colorIndicatorMarkup(product.color)}
       </p>
       <p class="product-price">${product.price} грн</p>
       <a class="more-info" data-id="${product._id}">Детальніше</a>
@@ -91,5 +92,4 @@ async function loadPopularFurniture(page = 1) {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadPopularFurniture(currentPage);
-
 });
