@@ -7,7 +7,7 @@
 
 .hero-section {
     position: relative;
-    background-image: url('../img/mobile/Hero-Section-mb-min.png');
+    background-image: url('../img/mobile/Hero-Section-mb-min.webp');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -20,7 +20,7 @@
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
     .hero-section {
-        background-image: url('../img/mobile/Hero-Section-mb@2x-min.png');
+        background-image: url('../img/mobile/Hero-Section-mb@2x-min.webp');
     }
 }
 
@@ -86,14 +86,14 @@
     }
 
     .hero-section {
-        background-image: url('../img/tablet/hero-section-tb-min.png');
+        background-image: url('../img/tablet/hero-section-tb-min.webp');
         padding: 112px 0;
     }
 
     @media (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi) {
         .hero-section {
-            background-image: url('../img/tablet/hero-section-tb@2x-min.png');
+            background-image: url('../img/tablet/hero-section-tb@2x-min.webp');
         }
     }
 
@@ -118,7 +118,7 @@
     }
 
     .hero-section {
-        background-image: url('../img/desktop/hero-section-dt-min.png');
+        background-image: url('../img/desktop/hero-section-dt-min.webp');
         height: 508px;
         display: flex;
         flex-direction: column;
@@ -129,7 +129,7 @@
     @media (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi) {
         .hero-section {
-            background-image: url('../img/desktop/hero-section-dt@2x-min.png');
+            background-image: url('../img/desktop/hero-section-dt@2x-min.webp');
         }
     }
 

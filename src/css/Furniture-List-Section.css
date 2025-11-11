@@ -200,7 +200,7 @@
     border-radius: 100px;
     padding: 10px 24px;
     width: 100%;
-    max-width: 310px;
+    
     height: 46px;
     font-weight: 500;
     font-size: 16px;
@@ -250,7 +250,9 @@
   }
 
   @media screen and (min-width: 768px) {
-
+    .furniture-item-img{
+      width: 340px;
+    }
     .categories-list-item {
       
       gap: 24px;
@@ -264,6 +266,9 @@
   
     .furniture-list {
       row-gap: 40px;
+    }
+    .furniture-item-img{
+      width: 310px;
     }
   
     .img-categories:hover {

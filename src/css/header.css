@@ -131,7 +131,7 @@
         top: 72px;
         left: 0;
         width: 100%;
-        height: calc(100% - 72px);
+        height: calc(100% - 78px);
         background-color: rgba(8, 12, 9, 0.4);
         opacity: 0;
         visibility: hidden;
