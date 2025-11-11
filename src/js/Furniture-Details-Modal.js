@@ -42,7 +42,7 @@ export const colorMarkup = color => {
                 background:${colorCode};
                 border-radius:50%;
                 margin-right:16px;
-                border:2px solid transparent;
+                ${borderStyle}
                 cursor:pointer;"
             ></button>`;
         })
@@ -171,6 +171,13 @@ export async function handleCardClick(e) {
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
     pickColor();
+
+    const firstColorButton =
+      modalRefs.contentWrapper.querySelector('.color-button');
+    if (firstColorButton) {
+      firstColorButton.click();
+    }
+
     initModalRating(data.rate);
 
     const orderBtn = modalRefs.contentWrapper.querySelector('.modal-order-btn');
