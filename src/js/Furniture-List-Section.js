@@ -87,6 +87,13 @@ async function loadFurniture(
 }
 
 categoriesList.addEventListener('click', e => {
+  if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+  window.scrollBy({
+    top: 1200,
+    behavior: "smooth",
+  });
+}
+
   const li = e.target.closest('li[data-category-id]');
   if (!li) return;
   const previousActiveLi = currentActiveCategoryLi;
