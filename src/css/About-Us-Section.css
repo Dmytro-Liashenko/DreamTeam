@@ -25,6 +25,7 @@ margin-bottom: 24px;
     border-radius: 8px;
     width: 335px;
     height: 436px;
+    object-fit: cover;
 
 }
 @media screen and (min-width: 764px){
