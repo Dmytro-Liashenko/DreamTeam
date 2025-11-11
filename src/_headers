@@ -1,0 +1,65 @@
+# Изображения
+/assets/A-cozy-ou…@2x-min-D1iWAq_A.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-set-of-…@2x-min-Bcb6N4dw.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-stylish-entryway@2x-min-DWp1EvLG.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-curated…@2x-min-BrUMqLK8.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-modern-…@2x-min-BWqSOYcs.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-contemp…@2x-min-CpJgWZp1.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-modern-…@2x-min-mNc4G8uL.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-sleek-w…@2x-min-CS2nriPh.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-modern-…@2x-min-ByseRGIN.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-bright-…@2x-min-DlZUBwTW.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-stylish…@2x-min-BCBaOrtz.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-modern-home@2x-min-BW-Vfm3T.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/Hero-Sect….png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/A-queen-s….png
+  Cache-Control: public, max-age=31536000, immutable
+
+/furniture/682f9bb…_1.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Скрипты
+/assets/vendor-D40M51PX.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/DreamTeam/index.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Стили
+/assets/vendor-DOArKK7h.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/index-CAP0A1GV.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+  

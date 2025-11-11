@@ -41,7 +41,7 @@ function onFormSubmit(event) {
 
   const form = event.currentTarget;
   const { name: nameInput, phone: phoneInput, comment } = form.elements;
-  const commentValue = comment.value;
+  const commentValue = comment.value.trim() || "user didn't leave the commetn";
 
   clearError(nameInput);
   clearError(phoneInput);
@@ -64,8 +64,9 @@ function onFormSubmit(event) {
 
   if (!isValid) return;
 
-  console.log(orderData.modelId);
-  console.log(orderData.color);
+  // console.log(orderData.modelId);
+  // console.log(orderData.color);
+  // console.log(commentValue);
 
   postUsersOrder({
     name: nameValue,
@@ -85,10 +86,29 @@ function onFormSubmit(event) {
       closeModal();
     })
     .catch(error => {
-      console.error('Failed to post order.', error.message);
+      console.error('Failed to post order.', error);
+
+      let errorMessage = 'Сталася невідома помилка. Спробуйте ще раз.';
+
+      if (error.message === 'Network Error') {
+        errorMessage =
+          'Немає з’єднання з сервером. Перевірте інтернет і спробуйте знову.';
+      } else if (error.response) {
+        if (error.response.status >= 500) {
+          errorMessage =
+            'Сервер тимчасово недоступний. Будь ласка, спробуйте пізніше.';
+        } else if (error.response.status === 400) {
+          errorMessage = 'Перевірте правильність заповнення форми.';
+        } else if (error.response.status === 404) {
+          errorMessage = 'Сервер не знайдено. Спробуйте пізніше.';
+        }
+      } else if (error.request) {
+        errorMessage = 'Відсутня відповідь від сервера. Спробуйте ще раз.';
+      }
+
       iziToast.error({
         title: 'Помилка',
-        message: `${error.message}`,
+        message: errorMessage,
         position: 'topRight',
       });
     });
