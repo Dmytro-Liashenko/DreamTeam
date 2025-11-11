@@ -1,6 +1,7 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 import { getPopularItems } from './products-api.js';
+import { handleCardClick } from './Furniture-Details-Modal.js'; 
 
 const wrapper = document.getElementById('popular-products-wrapper');
 let currentPage = 1;
@@ -17,28 +18,41 @@ function createSlideMarkup(products) {
           `<span style="display:inline-block; width:23px; height:23px; border-radius:50%; background:${c}; margin:0 2px;"></span>`).join('') : ''}
       </p>
       <p class="product-price">${product.price} грн</p>
-      <a class="more-info" href="/product/${product._id}">Детальніше</a>
+      <a class="more-info" data-id="${product._id}">Детальніше</a>
     </div>
   `).join('');
 }
 
 function addSlidesToSwiper(products) {
-  if (!swiper) {
-    wrapper.innerHTML = createSlideMarkup(products);
-    swiper = new Swiper('.popular-swiper', {
-      slidesPerView: 4,
-      spaceBetween: 20,
-      loop: true,
-      navigation: {
-        nextEl: '.popular-button-next',
-        prevEl: '.popular-button-prev',
-        disabledClass: 'disabled-nav'
+ if (!swiper) {
+  wrapper.innerHTML = createSlideMarkup(products);
+  swiper = new Swiper('.popular-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    navigation: {
+      nextEl: '.popular-button-next',
+      prevEl: '.popular-button-prev',
+      disabledClass: 'disabled-nav'
+    },
+    pagination: {
+      el: '.popular-pagination',
+      clickable: true
+    },
+    breakpoints: {
+      768: {  
+        slidesPerView: 2,
+        spaceBetween: 20
       },
-      pagination: {
-        el: '.popular-pagination',
-        clickable: true
+      1440: { 
+        slidesPerView: 4,
+        spaceBetween: 20
       }
-    });
+    }
+  });
+
+
+
 
     const prevBtn = document.querySelector('.popular-button-prev');
     const nextBtn = document.querySelector('.popular-button-next');
@@ -59,14 +73,16 @@ function addSlidesToSwiper(products) {
     });
     swiper.update();
   }
+
+  wrapper.querySelectorAll('.more-info').forEach(btn => {
+    btn.addEventListener('click', handleCardClick);
+  });
 }
 
 async function loadPopularFurniture(page = 1) {
-  try{
+  try {
     const products = await getPopularItems(page);
-    if(!products || products.length === 0) {
-      return;
-    } 
+    if (!products || products.length === 0) return;
     addSlidesToSwiper(products);
   } catch (err) {
     console.error('Помилка завантаження популярних товарів:', err);
@@ -76,7 +92,6 @@ async function loadPopularFurniture(page = 1) {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadPopularFurniture(currentPage);
-  
 
   document.querySelector('.popular-button-next').addEventListener('click', async () => {
     currentPage++;
@@ -84,9 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     swiper.slideNext();
   });
 
-
   document.querySelector('.popular-button-prev').addEventListener('click', () => {
     swiper.slidePrev();
   });
 });
- 
