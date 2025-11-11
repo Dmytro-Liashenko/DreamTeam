@@ -1,7 +1,6 @@
 import { renderFurniture } from './render-function';
 import { getFurnituresID, getFurnituresList } from './products-api';
 import { toggleModal } from './Order-Modal';
-import { initRatings } from './Feedback-Section';
 
 import Raty from 'raty-js';
 import starHalfUrl from '../img/star-icons/star-half.svg';
@@ -10,7 +9,7 @@ import starOnUrl from '../img/star-icons/star-on.svg';
 
 const modalRefs = {
   overlay: document.querySelector('[data-modal-item]'),
-  darkOverlay: document.querySelector('#menu-overlay'),
+  darkOverlay: document.querySelector('#menu-overlay-modal'),
   closeBtn: document.querySelector('[data-modal-close-furniture]'),
   contentWrapper: document.querySelector('.modal-content-wrapper'),
   furnitureList: document.querySelector('.furniture-list'),
@@ -26,14 +25,16 @@ export const colorMarkup = color => {
     ? color
         .map(c => {
           const colorCode = c.hex || c;
-          const borderStyle =
-            colorCode === '#fff'
-              ? 'border: 1px solid #ccc'
-              : 'border: 1px solid transparent';
-
+          const isWhite =
+            colorCode.toLowerCase() === '#fff' ||
+            colorCode.toLowerCase() === 'white' ||
+            colorCode.toLowerCase() === '#ffffff';
+          const defaultClass = isWhite
+            ? 'color-button color-button-white'
+            : 'color-button';
           return `
             <button 
-              class="color-button" 
+              class="${defaultClass}" 
               data-color="${colorCode}"
               style="
                 display:inline-block;
@@ -42,7 +43,6 @@ export const colorMarkup = color => {
                 background:${colorCode};
                 border-radius:50%;
                 margin-right:16px;
-                ${borderStyle}
                 cursor:pointer;"
             ></button>`;
         })
@@ -71,34 +71,16 @@ function initModalRating(score) {
 function pickColor() {
   const colorButtons = document.querySelectorAll('.color-button');
 
-  colorButtons.forEach(btn => {
-    const color = btn.dataset.color?.toLowerCase();
-    if (color === '#fff' || color === 'white') {
-      btn.style.border = '1px solid #838584';
-    } else {
-      btn.style.border = '3px solid transparent';
-    }
-  });
-
   colorButtons.forEach(button => {
     button.addEventListener('click', e => {
       const selectedColor = e.currentTarget.dataset.color.toLowerCase();
       orderData.color = selectedColor;
 
       colorButtons.forEach(btn => {
-        const color = btn.dataset.color?.toLowerCase();
-        if (color === '#fff' || color === 'white') {
-          btn.style.border = '1px solid #838584';
-        } else {
-          btn.style.border = '3px solid transparent';
-        }
+        btn.classList.remove('is-active');
       });
 
-      if (selectedColor === '#fff' || selectedColor === 'white') {
-        e.currentTarget.style.border = '2px solid #000';
-      } else {
-        e.currentTarget.style.border = '4px solid #838584';
-      }
+      e.currentTarget.classList.add('is-active');
     });
   });
 }
@@ -171,6 +153,7 @@ export async function handleCardClick(e) {
 
     modalRefs.contentWrapper.innerHTML = createProductModalMarkup(data);
     pickColor();
+
     const firstColorButton =
       modalRefs.contentWrapper.querySelector('.color-button');
     if (firstColorButton) {
