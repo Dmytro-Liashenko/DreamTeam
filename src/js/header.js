@@ -66,5 +66,6 @@ function scrollToFurniture() {
     behavior: 'smooth',
   });
   closeMobileMenu();
-  refs.btn.blur();
+  refs.mobileBtn.blur();
+  refs.desktopBtn.blur();
 }
