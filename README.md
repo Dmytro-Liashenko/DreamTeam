@@ -14,6 +14,6 @@
 	
 ## Як встановити та запустити
    ```bash
-   git clone https://github.com/Dmytro-Liashenko/DreamTeam
-   nmp install
+   git clone git@github.com:Dmytro-Liashenko/DreamTeam.git
+   npm install
    npm run dev
